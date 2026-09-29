@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#171717">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="750 Lab">
+  <title>750 Lab</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icon.svg">
+  <link rel="apple-touch-icon" href="./icon.svg">
+  <style>
+    *{box-sizing:border-box}html,body{margin:0;background:#f7f7f4;color:#171717;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+    body{min-height:100vh}.app{max-width:720px;margin:0 auto;padding:calc(28px + env(safe-area-inset-top)) 22px calc(40px + env(safe-area-inset-bottom))}
+    .eyebrow{font-size:12px;letter-spacing:1.3px;font-weight:800;color:#666}.title{font-size:34px;line-height:1.15;margin:14px 0}.body{font-size:16px;line-height:1.55;color:#444}
+    .card,.choice{background:#fff;border:1px solid #e5e5e0;border-radius:16px}.card{padding:18px;margin:20px 0}.choice{display:block;width:100%;padding:15px;text-align:left;margin:10px 0;font-size:15px}
+    .choice.selected{background:#171717;color:#fff;border-color:#171717}.row{display:flex;gap:8px}.pill{flex:1;padding:11px;border:1px solid #dadad3;border-radius:12px;background:transparent;font-weight:700}.pill.selected{background:#ecece6;border-color:#171717}
+    .primary{width:100%;padding:16px;border:0;border-radius:14px;background:#171717;color:#fff;font-size:16px;font-weight:800;margin-top:16px}.primary:disabled{opacity:.35}
+    .warning{background:#fff4d6;padding:14px;border-radius:12px;line-height:1.5;color:#555}.skill{background:#fff;border-radius:12px;padding:13px;margin:8px 0}.muted{color:#777;font-size:12px;line-height:1.5}
+    .hidden{display:none}.score{font-size:28px;font-weight:800;margin:8px 0}.install{font-size:13px;background:#fff;padding:12px 14px;border-radius:12px;border:1px dashed #bbb;margin-top:18px}
+  </style>
+</head>
+<body>
+<div class="app">
+  <section id="home">
+    <div class="eyebrow">DAY 0 · BASELINE</div>
+    <h1 class="title">Find your starting point first.</h1>
+    <p class="body">Today is diagnostic-only. No Daily Learning Pack or end-of-day knowledge summary will be created.</p>
+    <div class="card">
+      <strong>Reading baseline</strong>
+      <p class="body">16 original items across Parts 5, 6 and 7.</p>
+      <p class="muted">No unofficial TOEIC score conversion. Results use skill evidence, accuracy, confidence and response time.</p>
+    </div>
+    <button class="primary" id="start">Start diagnostic</button>
+    <div class="install">iPhone: Safari → Share → Add to Home Screen.</div>
+    <p class="muted">This app is not affiliated with or endorsed by ETS. TOEIC is a trademark of ETS.</p>
+  </section>
+
+  <section id="quiz" class="hidden">
+    <div class="eyebrow" id="progress"></div>
+    <h1 class="title" id="prompt"></h1>
+    <div id="choices"></div>
+    <h3>How confident are you?</h3>
+    <div class="row" id="confidence">
+      <button class="pill" data-v="sure">sure</button>
+      <button class="pill selected" data-v="unsure">unsure</button>
+      <button class="pill" data-v="guess">guess</button>
+    </div>
+    <button class="primary" id="next" disabled>Next</button>
+  </section>
+
+  <section id="result" class="hidden">
+    <div class="eyebrow">BASELINE SAVED</div>
+    <div class="score" id="score"></div>
+    <p class="body" id="accuracy"></p>
+    <div class="warning">This is not a TOEIC scaled score. Listening has not been measured yet, so an overall TOEIC level would be unsupported.</div>
+    <h3>Skill evidence</h3>
+    <div id="skills"></div>
+    <div class="card">
+      <strong>Confidence signals</strong>
+      <p class="body" id="signals"></p>
+    </div>
+    <button class="primary" id="restart">Run baseline again</button>
+  </section>
+</div>
+<script>
+const Q=[
+{id:'p5-001',part:5,skill:'parts_of_speech',p:'The marketing team responded _____ to the sudden increase in customer inquiries.',c:['prompt','promptly','promptness','prompting'],a:1},
+{id:'p5-002',part:5,skill:'agreement',p:'Each of the regional offices _____ its sales report by Friday afternoon.',c:['submit','submits','submitting','have submitted'],a:1},
+{id:'p5-003',part:5,skill:'prepositions',p:'The conference room will remain unavailable _____ noon because of maintenance.',c:['until','during','among','beside'],a:0},
+{id:'p5-004',part:5,skill:'tense',p:'By the time the auditors arrive tomorrow, the finance department _____ the records.',c:['prepares','prepared','will have prepared','has prepared'],a:2},
+{id:'p5-005',part:5,skill:'connectors',p:'_____ the shipment was delayed, the retailer informed customers immediately.',c:['Although','Despite','Because of','In spite'],a:0},
+{id:'p5-006',part:5,skill:'collocations',p:'Applicants are asked to _____ a copy of their identification with the form.',c:['attach','combine','join','stick'],a:0},
+{id:'p5-007',part:5,skill:'pronouns',p:'Ms. Patel thanked the volunteers for _____ assistance during the event.',c:['they','them','their','theirs'],a:2},
+{id:'p5-008',part:5,skill:'word_form',p:'The new scheduling system has improved the _____ of the support team.',c:['efficient','efficiently','efficiency','efficiencies'],a:2},
+{id:'p5-009',part:5,skill:'conditional',p:'If the supplier confirms the order today, we _____ the materials on Monday.',c:['receive','received','will receive','would receive'],a:2},
+{id:'p5-010',part:5,skill:'relative_clauses',p:'The consultant _____ presented the proposal will lead the implementation team.',c:['who','whose','which','where'],a:0},
+{id:'p6-001',part:6,skill:'cohesion',p:'A store notice first explains that the entrance is being renovated. Which sentence best follows?',c:['Customers should use the east-side entrance until the work is completed.','The company was founded more than thirty years ago.','Several employees attended a training seminar last month.','The catalog contains products in multiple colors.'],a:0},
+{id:'p6-002',part:6,skill:'reference',p:'“The updated policy is attached to this message. Please review it before Friday.” What does “it” refer to?',c:['Friday','the message','the updated policy','the attachment process'],a:2},
+{id:'p7-001',part:7,skill:'detail_retrieval',p:'Email: “Your interview has been moved from 10:00 A.M. to 11:30 A.M. on Tuesday. Please check in at reception ten minutes early.” When should the applicant check in?',c:['9:50 A.M.','10:50 A.M.','11:20 A.M.','11:30 A.M.'],a:2},
+{id:'p7-002',part:7,skill:'purpose',p:'Notice: “To reduce waiting time, customers may now book service appointments through our website.” What is the main purpose of the notice?',c:['To announce a new booking option','To advertise a new product','To request customer feedback','To explain a price increase'],a:0},
+{id:'p7-003',part:7,skill:'inference',p:'Memo: “The printer on the third floor will be replaced this afternoon. Until installation is complete, please send large print jobs to the second floor.” What can be inferred?',c:['The second-floor printer can handle print jobs.','All printing is prohibited today.','The third floor is closed.','Employees must print from home.'],a:0},
+{id:'p7-004',part:7,skill:'paraphrase',p:'“Complimentary parking is available to hotel guests.” Which sentence expresses the same idea?',c:['Guests can park without paying.','Guests must reserve parking in advance.','Parking is limited to hotel employees.','Parking fees are paid at checkout.'],a:0}
+];
+let i=0, choice=null, confidence='unsure', started=0, attempts=[];
+const $=id=>document.getElementById(id);
+function show(id){['home','quiz','result'].forEach(x=>$(x).classList.toggle('hidden',x!==id))}
+function render(){
+ const q=Q[i]; $('progress').textContent='QUESTION '+(i+1)+' / '+Q.length+' · PART '+q.part; $('prompt').textContent=q.p;
+ $('choices').innerHTML=''; q.c.forEach((x,n)=>{const b=document.createElement('button');b.className='choice'+(choice===n?' selected':'');b.textContent=String.fromCharCode(65+n)+'. '+x;b.onclick=()=>{choice=n;render();};$('choices').appendChild(b)});
+ $('next').disabled=choice===null; $('next').textContent=i===Q.length-1?'Finish baseline':'Next';
+ document.querySelectorAll('.pill').forEach(b=>b.classList.toggle('selected',b.dataset.v===confidence));
+}
+function finish(){
+ localStorage.setItem('toeic750.baseline.latest',JSON.stringify({completedAt:new Date().toISOString(),attempts}));
+ const correct=attempts.filter(x=>x.selected===x.correct).length, accuracy=Math.round(correct/attempts.length*100);
+ $('score').textContent='Reading evidence: '+correct+'/'+attempts.length; $('accuracy').textContent='Accuracy: '+accuracy+'%';
+ const grouped={}; attempts.forEach(x=>(grouped[x.skill]??=[]).push(x));
+ $('skills').innerHTML=''; Object.entries(grouped).forEach(([skill,items])=>{const c=items.filter(x=>x.selected===x.correct).length; const status=items.length<2?'insufficient evidence':c/items.length>=.8?'strong':c/items.length>=.6?'improving':'weak'; const d=document.createElement('div');d.className='skill';d.innerHTML='<strong>'+skill.replaceAll('_',' ')+'</strong><div class="muted">'+c+'/'+items.length+' · '+status+'</div>';$('skills').appendChild(d)});
+ const low=attempts.filter(x=>x.selected===x.correct&&x.confidence!=='sure').length, high=attempts.filter(x=>x.selected!==x.correct&&x.confidence==='sure').length;
+ $('signals').textContent='Correct but unsure/guess: '+low+' · Incorrect while sure: '+high; show('result');
+}
+$('start').onclick=()=>{i=0;choice=null;confidence='unsure';attempts=[];started=Date.now();show('quiz');render()};
+$('next').onclick=()=>{const q=Q[i];attempts.push({questionId:q.id,skill:q.skill,selected:choice,correct:q.a,confidence,responseTimeMs:Date.now()-started});if(i===Q.length-1)return finish();i++;choice=null;confidence='unsure';started=Date.now();render()};
+$('confidence').onclick=e=>{if(e.target.dataset.v){confidence=e.target.dataset.v;render()}};
+$('restart').onclick=()=>{$('start').click()};
+if('serviceWorker' in navigator){addEventListener('load',()=>navigator.serviceWorker.register('./sw.js').catch(()=>{}))}
+</script>
+</body>
+</html>
