@@ -6,10 +6,17 @@
     "orientation": "portrait",
     "scheme": "toeic750lab",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
-    "plugins": ["expo-router", "expo-sqlite"],
-    "android": { "package": "com.antuy154.toeic750lab" },
-    "ios": { "bundleIdentifier": "com.antuy154.toeic750lab", "supportsTablet": true },
+    "plugins": [
+      "expo-router",
+      "expo-sqlite"
+    ],
+    "android": {
+      "package": "com.antuy154.toeic750lab"
+    },
+    "ios": {
+      "bundleIdentifier": "com.antuy154.toeic750lab",
+      "supportsTablet": true
+    },
     "web": {
       "bundler": "metro",
       "output": "static",
