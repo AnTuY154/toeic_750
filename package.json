@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "main": "expo-router/entry",
-  "engines": { "node": ">=22.13.0" },
+  "engines": {
+    "node": ">=22.13.0"
+  },
   "scripts": {
     "start": "expo start",
     "android": "expo start --android",
@@ -37,6 +39,7 @@
     "@types/react": "~19.2.2",
     "eslint": "^9.39.4",
     "eslint-config-expo": "57.0.2",
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "@types/node": "^22.10.0"
   }
 }

@@ -4,7 +4,18 @@
     "strict": true,
     "baseUrl": ".",
     "ignoreDeprecations": "6.0",
-    "paths": { "@/*": ["./src/*"] }
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    },
+    "allowImportingTsExtensions": true
   },
-  "include": ["src/**/*.ts", "src/**/*.tsx", "__tests__/**/*.ts", ".expo/types/**/*.ts", "expo-env.d.ts"]
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "__tests__/**/*.ts",
+    ".expo/types/**/*.ts",
+    "expo-env.d.ts"
+  ]
 }
