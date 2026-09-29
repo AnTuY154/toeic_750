@@ -1,4 +1,4 @@
-import { useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { baselineQuestions } from '@/domain/diagnostic/questions';
 import { evaluateDiagnostic } from '@/domain/diagnostic/evaluate';
@@ -12,7 +12,10 @@ export default function DiagnosticScreen() {
   const [attempts, setAttempts] = useState<DiagnosticAttempt[]>([]);
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [finished, setFinished] = useState(false);
-  const startedAt = useRef(Date.now());
+  const startedAt = useRef(0);
+  useEffect(() => {
+    startedAt.current = Date.now();
+  }, []);
   const question = baselineQuestions[index];
   useMemo(() => evaluateDiagnostic(attempts), [attempts]);
 

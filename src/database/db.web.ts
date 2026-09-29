@@ -38,7 +38,7 @@ export async function createDiagnosticSession(): Promise<string> {
 }
 
 export async function saveAttempt(sessionId: string, attempt: DiagnosticAttempt) {
-  const attempts = readJson<Array<DiagnosticAttempt & { sessionId: string; attemptedAt: string }>>(
+  const attempts = readJson<(DiagnosticAttempt & { sessionId: string; attemptedAt: string })[]>(
     ATTEMPTS_KEY,
     []
   );
