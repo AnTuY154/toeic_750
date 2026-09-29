@@ -1,0 +1,20 @@
+{
+  "name": "750 Lab — Adaptive TOEIC Learning",
+  "short_name": "750 Lab",
+  "description": "Personal adaptive TOEIC diagnostic and learning app.",
+  "id": "/toeic_750/",
+  "start_url": "/toeic_750/",
+  "scope": "/toeic_750/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F7F7F4",
+  "theme_color": "#171717",
+  "icons": [
+    {
+      "src": "/toeic_750/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
