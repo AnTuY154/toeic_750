@@ -14,7 +14,7 @@ export default function HomeScreen() {
           </View>
 
           <View style={styles.hero}>
-            <Text style={styles.heroLabel}>TODAY'S FOCUS</Text>
+            <Text style={styles.heroLabel}>TODAY&apos;S FOCUS</Text>
             <Text style={styles.heroTitle}>{day1.title}</Text>
             <Text style={styles.body}>{day1.summary}</Text>
             <Pressable style={styles.button} onPress={() => router.push('/day-1')}><Text style={styles.buttonText}>Continue Day 1</Text></Pressable>
