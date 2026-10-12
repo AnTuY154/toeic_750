@@ -2,7 +2,7 @@ const CACHE = "750-lab-pwa-v2";
 const PRECACHE = [
   "/toeic_750/+not-found.html",
   "/toeic_750/_expo/.routes.json",
-  "/toeic_750/_expo/static/js/web/entry-6651847fa6ad56af235cd85de65cb69f.js",
+  "/toeic_750/_expo/static/js/web/entry-9fdb20c4a41ed149a49ceeb0a3062ef9.js",
   "/toeic_750/_sitemap.html",
   "/toeic_750/assets/node_modules/expo-router/assets/arrow_down.017bc6ba3fc25503e5eb5e53826d48a8.png",
   "/toeic_750/assets/node_modules/expo-router/assets/error.d1ea1496f9057eb392d5bbf3732a61b7.png",
@@ -24,6 +24,8 @@ const PRECACHE = [
   "/toeic_750/assets/node_modules/expo-router/assets/unmatched.20e71bdf79e3a97bf55fd9e164041578.png",
   "/toeic_750/day-1-practice.html",
   "/toeic_750/day-1.html",
+  "/toeic_750/day-2-practice.html",
+  "/toeic_750/day-2.html",
   "/toeic_750/diagnostic.html",
   "/toeic_750/icon.svg",
   "/toeic_750/index.html",
