@@ -56,3 +56,29 @@ jobs:
           git add -A
           git commit -m "deploy: publish PWA from ${GITHUB_SHA}" || exit 0
           git push origin gh-pages
+
+      - name: Smoke test live CCAR-F page
+        shell: bash
+        run: |
+          set -euo pipefail
+          CLEAN_URL="https://antuy154.github.io/toeic_750/ccar-vocabulary/?build=${GITHUB_SHA}"
+          LEGACY_URL="https://antuy154.github.io/toeic_750/ccar-vocabulary.html?build=${GITHUB_SHA}"
+
+          echo "Waiting for GitHub Pages to serve the new clean route..."
+          for attempt in $(seq 1 30); do
+            clean_body="$(curl -fsSL --max-time 15 "$CLEAN_URL" 2>/dev/null || true)"
+            legacy_body="$(curl -fsSL --max-time 15 "$LEGACY_URL" 2>/dev/null || true)"
+
+            if printf '%s' "$clean_body" | grep -q "Claude Architecture Glossary" \
+              && printf '%s' "$clean_body" | grep -q "stop_reason" \
+              && printf '%s' "$legacy_body" | grep -q "window.history.replaceState"; then
+              echo "Live smoke test passed on attempt $attempt."
+              exit 0
+            fi
+
+            echo "Attempt $attempt: deployment not ready yet."
+            sleep 5
+          done
+
+          echo "Live smoke test failed after 30 attempts."
+          exit 1

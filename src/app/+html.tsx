@@ -4,6 +4,17 @@ import type { PropsWithChildren } from 'react';
 const base = '/toeic_750';
 
 export default function Root({ children }: PropsWithChildren) {
+  const normalizeStaticRoute =
+    "(function () {" +
+    "var path = window.location.pathname;" +
+    "var clean = path;" +
+    "if (path.endsWith('/index.html')) clean = path.slice(0, -10);" +
+    "else if (path.endsWith('.html')) clean = path.slice(0, -5);" +
+    "if (clean !== path) {" +
+    "window.history.replaceState(null, '', clean + window.location.search + window.location.hash);" +
+    "}" +
+    "})();";
+
   const registerServiceWorker =
     "if ('serviceWorker' in navigator) {" +
     "window.addEventListener('load', function () {" +
@@ -33,6 +44,7 @@ export default function Root({ children }: PropsWithChildren) {
         <link rel="manifest" href={base + '/manifest.json'} />
         <link rel="icon" href={base + '/icon.svg'} />
         <link rel="apple-touch-icon" href={base + '/icon.svg'} />
+        <script dangerouslySetInnerHTML={{ __html: normalizeStaticRoute }} />
         <script dangerouslySetInnerHTML={{ __html: registerServiceWorker }} />
         <ScrollViewStyleReset />
       </head>

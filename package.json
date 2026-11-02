@@ -11,7 +11,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "build:web": "expo export -p web && node scripts/generate-sw.mjs",
+    "build:web": "expo export -p web && node scripts/generate-pretty-routes.mjs && node scripts/generate-sw.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
     "test": "node --experimental-strip-types --test __tests__/*.test.ts",
