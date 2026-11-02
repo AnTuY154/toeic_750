@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { day2 } from '@/content/day2';
+import { allVocabulary } from '@/content/vocabulary';
 import { AppNav } from '@/components/AppNav';
 
 export default function HomeScreen() {
@@ -20,8 +21,10 @@ export default function HomeScreen() {
           <View style={styles.grid}>
             <Pressable style={styles.actionCard} onPress={() => router.push('/day-2')}><Text style={styles.actionMeta}>LESSON</Text><Text style={styles.actionTitle}>7 concepts</Text><Text style={styles.note}>Word forms + Part 1</Text></Pressable>
             <Pressable style={styles.actionCard} onPress={() => router.push('/day-2-practice')}><Text style={styles.actionMeta}>PRACTICE</Text><Text style={styles.actionTitle}>12 questions</Text><Text style={styles.note}>8 reading + 4 listening scripts</Text></Pressable>
+            <Pressable style={styles.actionCard} onPress={() => router.push('/vocabulary')}><Text style={styles.actionMeta}>FLASHCARDS</Text><Text style={styles.actionTitle}>{allVocabulary.length} words</Text><Text style={styles.note}>Vocabulary · Day 1–7</Text></Pressable>
             <Pressable style={styles.actionCard} onPress={() => router.push('/review')}><Text style={styles.actionMeta}>REVIEW</Text><Text style={styles.actionTitle}>{day2.reviewQueue.length} queues</Text><Text style={styles.note}>Day 1 transfer + new vocab</Text></Pressable>
             <Pressable style={styles.actionCard} onPress={() => router.push('/mistakes')}><Text style={styles.actionMeta}>ERROR LOG</Text><Text style={styles.actionTitle}>7 tracked skills</Text><Text style={styles.note}>Improving / Monitor / Evidence</Text></Pressable>
+            <Pressable style={styles.actionCard} onPress={() => router.push('/diagnostic')}><Text style={styles.actionMeta}>BASELINE</Text><Text style={styles.actionTitle}>Diagnostic</Text><Text style={styles.note}>Reading evidence from Day 0</Text></Pressable>
           </View>
           <Text style={styles.sectionTitle}>Day 2 evidence</Text>
           <View style={styles.stats}>
