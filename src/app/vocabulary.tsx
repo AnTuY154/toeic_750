@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { AppNav } from '@/components/AppNav';
 import { allVocabulary, vocabularyDays, type VocabularyCard } from '@/content/vocabulary';
@@ -26,9 +26,7 @@ export default function VocabularyScreen() {
   const [filter, setFilter] = useState<DayFilter>('all');
   const [index, setIndex] = useState(0);
   const [revealed, setRevealed] = useState(false);
-  const [ratings, setRatings] = useState<Record<string, Rating>>({});
-
-  useEffect(() => setRatings(readRatings()), []);
+  const [ratings, setRatings] = useState<Record<string, Rating>>(() => readRatings());
 
   const cards = useMemo(() => {
     if (filter === 'all') return allVocabulary;
