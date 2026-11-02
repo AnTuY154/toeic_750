@@ -2,7 +2,7 @@ const CACHE = "750-lab-pwa-v2";
 const PRECACHE = [
   "/toeic_750/+not-found.html",
   "/toeic_750/_expo/.routes.json",
-  "/toeic_750/_expo/static/js/web/entry-9fdb20c4a41ed149a49ceeb0a3062ef9.js",
+  "/toeic_750/_expo/static/js/web/entry-e91810102dd3338e72e5453947b63bfd.js",
   "/toeic_750/_sitemap.html",
   "/toeic_750/assets/node_modules/expo-router/assets/arrow_down.017bc6ba3fc25503e5eb5e53826d48a8.png",
   "/toeic_750/assets/node_modules/expo-router/assets/error.d1ea1496f9057eb392d5bbf3732a61b7.png",
@@ -33,7 +33,8 @@ const PRECACHE = [
   "/toeic_750/manifest.json",
   "/toeic_750/mistakes.html",
   "/toeic_750/progress.html",
-  "/toeic_750/review.html"
+  "/toeic_750/review.html",
+  "/toeic_750/vocabulary.html"
 ];
 const APP_ROOT = "/toeic_750/";
 self.addEventListener('install', (event) => { event.waitUntil(caches.open(CACHE).then((cache) => cache.addAll(PRECACHE)).then(() => self.skipWaiting())); });
