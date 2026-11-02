@@ -63,22 +63,46 @@ jobs:
           set -euo pipefail
           CLEAN_URL="https://antuy154.github.io/toeic_750/ccar-vocabulary/?build=${GITHUB_SHA}"
           LEGACY_URL="https://antuy154.github.io/toeic_750/ccar-vocabulary.html?build=${GITHUB_SHA}"
+          BROWSER="$(command -v google-chrome || command -v chromium || command -v chromium-browser || true)"
 
-          echo "Waiting for GitHub Pages to serve the new clean route..."
+          if [[ -z "$BROWSER" ]]; then
+            echo "No headless Chromium/Chrome binary available on runner."
+            exit 1
+          fi
+
+          echo "Using browser: $BROWSER"
+          echo "Waiting for GitHub Pages and testing real browser hydration..."
+
           for attempt in $(seq 1 30); do
             clean_body="$(curl -fsSL --max-time 15 "$CLEAN_URL" 2>/dev/null || true)"
             legacy_body="$(curl -fsSL --max-time 15 "$LEGACY_URL" 2>/dev/null || true)"
 
-            if printf '%s' "$clean_body" | grep -q "Claude Architecture Glossary" \
-              && printf '%s' "$clean_body" | grep -q "stop_reason" \
-              && printf '%s' "$legacy_body" | grep -q "window.history.replaceState"; then
-              echo "Live smoke test passed on attempt $attempt."
-              exit 0
+            static_ready=false
+            if [[ "$clean_body" == *"Claude Architecture Glossary"* ]] \
+              && [[ "$clean_body" == *"stop_reason"* ]] \
+              && [[ "$legacy_body" == *"window.history.replaceState"* ]]; then
+              static_ready=true
             fi
 
-            echo "Attempt $attempt: deployment not ready yet."
+            if [[ "$static_ready" == true ]]; then
+              clean_dom="$("$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=5000 --dump-dom "$CLEAN_URL" 2>/dev/null || true)"
+              legacy_dom="$("$BROWSER" --headless --no-sandbox --disable-gpu --virtual-time-budget=5000 --dump-dom "$LEGACY_URL" 2>/dev/null || true)"
+
+              if [[ "$clean_dom" == *"Claude Architecture Glossary"* ]] \
+                && [[ "$clean_dom" != *"Unmatched Route"* ]] \
+                && [[ "$legacy_dom" == *"Claude Architecture Glossary"* ]] \
+                && [[ "$legacy_dom" != *"Unmatched Route"* ]]; then
+                echo "Live browser smoke test passed on attempt $attempt."
+                exit 0
+              fi
+
+              echo "Attempt $attempt: static files ready, browser hydration not ready."
+            else
+              echo "Attempt $attempt: deployment not ready yet."
+            fi
+
             sleep 5
           done
 
-          echo "Live smoke test failed after 30 attempts."
+          echo "Live browser smoke test failed after 30 attempts."
           exit 1
