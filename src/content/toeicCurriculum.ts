@@ -1,18 +1,18 @@
-import agent01 from './agents/agent-01-parts-of-speech';
-import agent02 from './agents/agent-02-be-do-have';
-import agent03 from './agents/agent-03-basic-workplace';
-import agent04 from './agents/agent-04-prepositions';
-import agent05 from './agents/agent-05-wh-questions';
-import agent06 from './agents/agent-06-daily-work-vocab';
-import agent07 from './agents/agent-07-passive-voice';
-import agent08 from './agents/agent-08-part3-basics';
-import agent09 from './agents/agent-09-email-basics';
-import agent10 from './agents/agent-10-conjunctions';
-import agent11 from './agents/agent-11-part4-talks';
-import agent12 from './agents/agent-12-business-collocations';
-import agent13 from './agents/agent-13-advanced-grammar';
-import agent14 from './agents/agent-14-multiple-passages';
-import agent15 from './agents/agent-15-timed-mock';
+import agent01 from './agents/agent-01-parts-of-speech.ts';
+import agent02 from './agents/agent-02-be-do-have.ts';
+import agent03 from './agents/agent-03-basic-workplace.ts';
+import agent04 from './agents/agent-04-prepositions.ts';
+import agent05 from './agents/agent-05-wh-questions.ts';
+import agent06 from './agents/agent-06-daily-work-vocab.ts';
+import agent07 from './agents/agent-07-passive-voice.ts';
+import agent08 from './agents/agent-08-part3-basics.ts';
+import agent09 from './agents/agent-09-email-basics.ts';
+import agent10 from './agents/agent-10-conjunctions.ts';
+import agent11 from './agents/agent-11-part4-talks.ts';
+import agent12 from './agents/agent-12-business-collocations.ts';
+import agent13 from './agents/agent-13-advanced-grammar.ts';
+import agent14 from './agents/agent-14-multiple-passages.ts';
+import agent15 from './agents/agent-15-timed-mock.ts';
 
 export type ToeicLevel = {
   id: string;
