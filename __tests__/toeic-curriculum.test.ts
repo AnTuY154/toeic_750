@@ -38,13 +38,17 @@ test('vocabulary and listening scripts include learner support', () => {
   assert.ok(vocabularySeed.length >= 8);
   assert.ok(allVocabulary.length >= 55);
   assert.ok(allVocabulary.every((item) => item.topic && item.word && item.meaning));
-  assert.ok(vocabularySeed.every((item) => item.word && item.meaning && item.pos && item.example));
+  for (let index = 0; index < vocabularySeed.length; index += 1) {
+    const item = vocabularySeed[index]!;
+    assert.ok(item.word && item.meaning && item.pos && item.example);
+  }
   assert.ok(listeningScripts.length >= 3);
-  assert.ok(listeningScripts.every((item) => item.script && item.translation && item.vocabulary.length > 0));
-  for (const item of listeningScripts) {
+  for (let index = 0; index < listeningScripts.length; index += 1) {
+    const item = listeningScripts[index]!;
+    assert.ok(item.script && item.translation && item.vocabulary.length > 0);
     if ('questions' in item) {
       assert.ok(item.questions.length >= 3);
-      assert.ok(item.questions.every((question) => question.explanation && question.explanation.length > 20));
+      for (const question of item.questions) assert.ok(question.explanation && question.explanation.length > 20);
     }
   }
 });
