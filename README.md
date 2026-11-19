@@ -14,7 +14,7 @@ Every lesson follows the same order:
 
 ## Learning roadmap
 
-The site groups learning into five pedagogical stages:
+The site groups learning into five pedagogical stages. The first implementation includes one complete core lesson and its linked question set in each stage; remaining roadmap topics are clearly marked as planned rather than shown as finished content:
 
 - 0–150: Foundation — sentence structure, parts of speech, basic workplace vocabulary.
 - 151–300: Beginner — basic tenses, prepositions, question-response.
@@ -27,10 +27,10 @@ These are learning milestones designed by 750 Lab, **not official ETS score band
 ## Main sections
 
 - Home dashboard and learning roadmap
-- Knowledge library, grouped by level
+- Knowledge library, grouped by level, with one complete starter lesson for each of the five milestones
 - Lesson view with theory, examples and vocabulary before its linked exercise
 - Practice with answer feedback and score summary
-- Vocabulary flashcards with meaning, part of speech, topic and example
+- Vocabulary flashcards aggregated from lesson vocabulary, with meaning, part of speech, topic and example
 - Listening studio with speaker-labelled scripts, questions, translation and vocabulary. Scripts are provided for the learner to convert to audio with their preferred text-to-speech tool.
 
 ## TOEIC format reference
