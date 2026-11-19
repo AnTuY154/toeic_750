@@ -24,7 +24,7 @@ export default function Root({ children }: PropsWithChildren) {
     "}";
 
   return (
-    <html lang="en">
+    <html lang="vi">
       <head>
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
@@ -39,7 +39,7 @@ export default function Root({ children }: PropsWithChildren) {
         <meta name="apple-mobile-web-app-title" content="750 Lab" />
         <meta
           name="description"
-          content="Personal adaptive TOEIC diagnostic and learning app."
+          content="Lộ trình học và luyện thi TOEIC Listening & Reading từ nền tảng đến mục tiêu 750 điểm."
         />
         <link rel="manifest" href={base + '/manifest.json'} />
         <link rel="icon" href={base + '/icon.svg'} />
