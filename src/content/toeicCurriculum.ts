@@ -241,7 +241,20 @@ export const listeningScripts = [
     explanation: 'Câu đầu nêu mục đích cuộc gọi (confirm your appointment). Lịch hẹn được đổi sang Friday at ten fifteen.',
     translation: 'Người phụ nữ gọi để xác nhận lịch hẹn nha khoa. Người đàn ông đề nghị chuyển sang sáng thứ Sáu lúc 10:15.',
     vocabulary: ['confirm: xác nhận', 'appointment: cuộc hẹn', 'opening: khung giờ còn trống'],
-  },
+  },,
+  {
+    id: 'listening-03', part: 'Part 4 · Announcement', level: '451–600', title: 'Office maintenance notice',
+    instruction: 'Chuyển script thành audio với một giọng đọc thông báo rõ ràng. Nghe để xác định địa điểm, thời gian và việc người nghe cần làm.',
+    script: 'Attention, employees. The main conference room will be unavailable this Thursday due to scheduled maintenance. All meetings originally booked for that room have been moved to Conference Room B on the second floor. If you have any questions, please contact the facilities department before Wednesday afternoon.',
+    questions: [
+      { prompt: 'What is the purpose of the announcement?', choices: ['To report a room change', 'To introduce a new employee', 'To announce a company merger', 'To advertise a service'], answer: 0, explanation: 'Thông báo cho biết phòng họp chính sẽ đóng cửa và các cuộc họp được chuyển sang phòng khác.' },
+      { prompt: 'When will the main conference room be unavailable?', choices: ['This Wednesday', 'This Thursday', 'Next Monday', 'Friday afternoon'], answer: 1, explanation: 'Người nói nêu rõ phòng họp không sử dụng được vào Thursday.' },
+      { prompt: 'Who should employees contact with questions?', choices: ['The sales department', 'The building manager', 'The facilities department', 'The human resources team'], answer: 2, explanation: 'Câu cuối yêu cầu liên hệ facilities department trước chiều thứ Tư.' },
+    ],
+    explanation: 'Thông báo về việc bảo trì phòng họp chính vào thứ Năm, chuyển các cuộc họp sang Conference Room B ở tầng hai.',
+    translation: 'Chú ý nhân viên: Phòng họp chính sẽ không sử dụng được vào thứ Năm này do bảo trì theo lịch. Tất cả cuộc họp đã đặt tại phòng đó được chuyển sang Phòng họp B ở tầng hai. Nếu có câu hỏi, vui lòng liên hệ bộ phận cơ sở vật chất trước chiều thứ Tư.',
+    vocabulary: ['unavailable: không thể sử dụng', 'scheduled maintenance: bảo trì theo lịch', 'facilities department: bộ phận cơ sở vật chất'],
+  }
 ];
 
 export const practiceQuestions = [
