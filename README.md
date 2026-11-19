@@ -31,7 +31,7 @@ These are learning milestones designed by 750 Lab, **not official ETS score band
 - Lesson view with theory, examples and vocabulary before its linked exercise
 - Practice with answer feedback and score summary
 - Vocabulary flashcards aggregated from lesson vocabulary, with meaning, part of speech, topic and example
-- Listening studio with speaker-labelled scripts, questions, translation and vocabulary. Scripts are provided for the learner to convert to audio with their preferred text-to-speech tool.
+- Listening studio with Part 2–4 sample scripts, speaker-labelled dialogues/announcements, questions, translation and vocabulary. Scripts are provided for the learner to convert to audio with their preferred text-to-speech tool; Part 1 practice will need picture prompts.
 
 ## TOEIC format reference
 
