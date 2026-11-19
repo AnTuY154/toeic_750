@@ -14,7 +14,7 @@ Every lesson follows the same order:
 
 ## Learning roadmap
 
-The site groups learning into five pedagogical stages. The first implementation includes one complete core lesson and its linked question set in each stage; remaining roadmap topics are clearly marked as planned rather than shown as finished content:
+The site groups learning into five pedagogical stages. All 20 roadmap topics now have complete lesson content, examples, vocabulary and linked practice questions:
 
 - 0–150: Foundation — sentence structure, parts of speech, basic workplace vocabulary.
 - 151–300: Beginner — basic tenses, prepositions, question-response.
