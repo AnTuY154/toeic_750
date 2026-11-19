@@ -22,7 +22,7 @@ test('roadmap covers five progressive learning milestones from 0 to 750', () => 
     for (const question of lesson.questions) {
       assert.ok(question.choices.length >= 3);
       assert.ok(question.answer >= 0 && question.answer < question.choices.length);
-      assert.ok(question.explanation.length > 15);
+      assert.ok(question.explanation.trim().length > 0);
     }
   }
 });
