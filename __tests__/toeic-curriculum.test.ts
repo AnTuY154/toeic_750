@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { allVocabulary, lessonLibrary, listeningScripts, practiceQuestions, starterLesson, toeicLevels, vocabularySeed } from '../src/content/toeicCurriculum.ts';
+import { allVocabulary, lessonLibrary, listeningScripts, practiceQuestions, specialistLessons, starterLesson, toeicLevels, vocabularySeed } from '../src/content/toeicCurriculum.ts';
 
 test('roadmap covers five progressive learning milestones from 0 to 750', () => {
   assert.equal(toeicLevels.length, 5);
@@ -10,6 +10,8 @@ test('roadmap covers five progressive learning milestones from 0 to 750', () => 
     assert.ok(level.outcomes.length >= 3);
   }
   assert.equal(lessonLibrary.length, 20);
+  assert.equal(specialistLessons.length, 15);
+  assert.equal(new Set(lessonLibrary.map((lesson) => lesson.id)).size, 20, 'lesson IDs must be unique');
   for (const level of toeicLevels) {
     assert.ok(level.lessons.every((lesson) => lessonLibrary.some((content) => content.id === lesson.id)), `missing lesson content for ${level.range}`);
   }
