@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { allVocabulary } from '@/content/toeicCurriculum';
 import { AppNav } from '@/components/AppNav';
