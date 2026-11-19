@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { listeningScripts } from '@/content/toeicCurriculum';
 import { AppNav } from '@/components/AppNav';
+type ListeningQuestion = { prompt: string; choices: string[]; answer: number; explanation?: string };
 export default function ListeningScreen(){
  const [index,setIndex]=useState(0);const [showScript,setShowScript]=useState(false);const [answers,setAnswers]=useState<Record<number,number>>({});const [checked,setChecked]=useState<Record<number,boolean>>({});
  const current=listeningScripts[index]!;
- const questionSet=('questions' in current && current.questions?.length)?current.questions:[{prompt:'Choose the best response.',choices:current.choices,answer:current.answer}];
+ const questionSet: ListeningQuestion[]=('questions' in current && current.questions?.length)?current.questions.map((question)=>({prompt:question.prompt,choices:question.choices??[],answer:question.answer??0,explanation:question.explanation} )):[{prompt:'Choose the best response.',choices:current.choices??[],answer:current.answer??0}];
  function selectScript(i:number){setIndex(i);setShowScript(false);setAnswers({});setChecked({});}
  function checkQuestion(i:number){setChecked(x=>({...x,[i]:true}));}
  return <SafeAreaView style={s.safe}><View style={s.shell}><ScrollView contentContainerStyle={s.c}>
@@ -19,7 +20,7 @@ export default function ListeningScreen(){
   </View>
   <Text style={s.section}>Câu hỏi kiểm tra</Text>
   {questionSet.map((q,i)=><View key={i} style={s.question}><Text style={s.qTitle}>Question {i+1}: {q.prompt}</Text>{q.choices.map((choice,j)=>{const selected=answers[i]===j;const isCorrect=checked[i]&&q.answer===j;const isWrong=checked[i]&&selected&&q.answer!==j;return <Pressable key={choice} disabled={!!checked[i]} onPress={()=>setAnswers(x=>({...x,[i]:j}))} style={[s.choice,selected&&!checked[i]&&s.selected,isCorrect&&s.correct,isWrong&&s.wrong]}><Text style={[s.choiceText,selected&&!checked[i]&&s.selectedText]}>{String.fromCharCode(65+j)}. {choice}</Text></Pressable>;})}
-   {checked[i]?<View style={s.feedback}><Text style={s.feedbackTitle}>{answers[i]===q.answer?'Correct':'Review this answer'}</Text><Text style={s.feedbackText}>{'explanation' in q ? q.explanation : current.explanation}</Text></View>:<Pressable disabled={answers[i]===undefined} onPress={()=>checkQuestion(i)} style={[s.checkBtn,answers[i]===undefined&&s.disabled]}><Text style={s.checkText}>Kiểm tra đáp án</Text></Pressable>}
+   {checked[i]?<View style={s.feedback}><Text style={s.feedbackTitle}>{answers[i]===q.answer?'Correct':'Review this answer'}</Text><Text style={s.feedbackText}>{q.explanation ?? current.explanation}</Text></View>:<Pressable disabled={answers[i]===undefined} onPress={()=>checkQuestion(i)} style={[s.checkBtn,answers[i]===undefined&&s.disabled]}><Text style={s.checkText}>Kiểm tra đáp án</Text></Pressable>}
   </View>)}
   {questionSet.every((_,i)=>checked[i])?<View style={s.support}><Text style={s.supportTitle}>Tổng kết và học từ mới</Text><Text style={s.body}>{current.explanation}</Text><Text style={s.supportTitle}>Bản dịch tham khảo</Text><Text style={s.body}>{current.translation}</Text><Text style={s.supportTitle}>Vocabulary</Text>{current.vocabulary.map(v=><Text key={v} style={s.vocab}>• {v}</Text>)}</View>:null}
   <View style={s.nav}><Pressable disabled={index===0} onPress={()=>selectScript(index-1)} style={s.navBtn}><Text style={s.navText}>← Bài trước</Text></Pressable><Pressable disabled={index===listeningScripts.length-1} onPress={()=>selectScript(index+1)} style={s.navBtn}><Text style={s.navText}>Bài tiếp theo →</Text></Pressable></View>
