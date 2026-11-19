@@ -13,7 +13,7 @@ export const toeicLevels: ToeicLevel[] = [
     outcomes: ['Nhận biết chủ ngữ, động từ và tân ngữ', 'Dùng được be, have, do và hiện tại đơn', 'Hiểu chỉ dẫn và câu mô tả quen thuộc'],
     lessons: [
       { id: 'sentence-basics', title: 'Cấu trúc câu tiếng Anh cơ bản', skill: 'Grammar · Reading', duration: '20 phút', status: 'ready' },
-      { id: 'parts-of-speech', title: 'Danh từ, động từ, tính từ và trạng từ', skill: 'Grammar · Part 5', duration: '25 phút', status: 'ready' },
+      { id: 'parts-of-speech', title: 'Danh từ, động từ, tính từ và trạng từ', skill: 'Grammar · Part 5', duration: '25 phút', status: 'planned' },
       { id: 'be-do-have', title: 'Động từ be, do, have', skill: 'Grammar · Listening', duration: '20 phút', status: 'planned' },
       { id: 'basic-workplace', title: 'Từ vựng nơi làm việc cơ bản', skill: 'Vocabulary', duration: '15 phút', status: 'planned' },
     ],
