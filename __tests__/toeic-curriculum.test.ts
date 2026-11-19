@@ -18,7 +18,7 @@ test('roadmap covers five progressive learning milestones from 0 to 750', () => 
   for (const lesson of lessonLibrary) {
     assert.ok(lesson.sections.length >= 3, `missing knowledge sections: ${lesson.id}`);
     assert.ok(lesson.vocabulary.length >= 3, `missing vocabulary: ${lesson.id}`);
-    assert.ok(lesson.questions.length >= 4, `missing linked practice: ${lesson.id}`);
+    assert.equal(lesson.questions.length, 12, `each lesson must contain exactly 12 questions: ${lesson.id}`);
     for (const question of lesson.questions) {
       assert.ok(question.choices.length >= 3);
       assert.ok(question.answer >= 0 && question.answer < question.choices.length);
@@ -30,7 +30,7 @@ test('roadmap covers five progressive learning milestones from 0 to 750', () => 
 test('starter lesson presents knowledge and examples before linked practice', () => {
   assert.ok(starterLesson.sections.length >= 3);
   assert.ok(starterLesson.sections.every((section) => section.body.length > 20 && section.examples.length > 0));
-  assert.ok(starterLesson.questions.length >= 3);
+  assert.equal(starterLesson.questions.length, 12);
   assert.equal(practiceQuestions.length, starterLesson.questions.length);
 });
 
