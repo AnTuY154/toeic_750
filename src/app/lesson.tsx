@@ -1,8 +1,7 @@
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { starterLesson } from '@/content/toeicCurriculum';
 export default function LessonScreen(){
- const params=useLocalSearchParams<{id?:string}>();
  const lesson=starterLesson;
  return <SafeAreaView style={s.safe}><ScrollView contentContainerStyle={s.c}>
   <Pressable onPress={()=>router.back()}><Text style={s.back}>← Quay lại lộ trình</Text></Pressable>
