@@ -1,0 +1,17 @@
+import { router, useLocalSearchParams } from 'expo-router';
+import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { starterLesson } from '@/content/toeicCurriculum';
+export default function LessonScreen(){
+ const params=useLocalSearchParams<{id?:string}>();
+ const lesson=starterLesson;
+ return <SafeAreaView style={s.safe}><ScrollView contentContainerStyle={s.c}>
+  <Pressable onPress={()=>router.back()}><Text style={s.back}>← Quay lại lộ trình</Text></Pressable>
+  <Text style={s.eyebrow}>LEVEL {lesson.level} · KNOWLEDGE FIRST</Text><Text style={s.title}>{lesson.title}</Text><View style={s.objective}><Text style={s.objectiveLabel}>MỤC TIÊU BÀI HỌC</Text><Text style={s.objectiveText}>{lesson.objective}</Text></View>
+  <Text style={s.sectionTitle}>Phần 1 · Kiến thức</Text>
+  {lesson.sections.map((section,i)=><View key={section.heading} style={s.card}><Text style={s.sectionHeading}>{section.heading}</Text><Text style={s.body}>{section.body}</Text>{section.examples.map(example=><View key={example} style={s.example}><Text style={s.exampleText}>{example}</Text></View>)}</View>)}
+  <Text style={s.sectionTitle}>Phần 2 · Từ vựng trong bài</Text>
+  {lesson.vocabulary.map(word=><View key={word.word} style={s.word}><View style={s.wordHead}><Text style={s.wordTitle}>{word.word}</Text><Text style={s.pos}>{word.pos}</Text></View><Text style={s.meaning}>{word.meaning}</Text><Text style={s.exampleText}>{word.example}</Text></View>)}
+  <View style={s.ready}><Text style={s.readyTitle}>Bạn đã học xong phần kiến thức?</Text><Text style={s.body}>Bây giờ hãy làm các câu hỏi được thiết kế trực tiếp từ nội dung vừa học. Đáp án và giải thích sẽ xuất hiện sau khi bạn chọn.</Text><Pressable style={s.button} onPress={()=>router.push('/practice')}><Text style={s.buttonText}>Làm bài tập liên quan →</Text></Pressable></View>
+ </ScrollView></SafeAreaView>
+}
+const s=StyleSheet.create({safe:{flex:1,backgroundColor:'#F5F4EF'},c:{padding:20,gap:13,paddingBottom:35,maxWidth:900,width:'100%',alignSelf:'center'},back:{fontSize:12,fontWeight:'800',color:'#64745F'},eyebrow:{fontSize:10,letterSpacing:1.4,fontWeight:'900',color:'#71816B',marginTop:8},title:{fontSize:29,lineHeight:36,fontWeight:'900',color:'#20251F'},objective:{backgroundColor:'#E9EDE5',borderRadius:16,padding:15,gap:5},objectiveLabel:{fontSize:9,letterSpacing:1,fontWeight:'900',color:'#6D8068'},objectiveText:{fontSize:14,lineHeight:21,fontWeight:'700',color:'#344536'},sectionTitle:{fontSize:19,fontWeight:'900',color:'#20251F',marginTop:7},card:{backgroundColor:'#FFF',borderRadius:17,padding:16,borderWidth:1,borderColor:'#E8E6DD',gap:9},sectionHeading:{fontSize:16,fontWeight:'900',color:'#2D382D'},body:{fontSize:13,lineHeight:21,color:'#666D63'},example:{backgroundColor:'#F4F4EF',borderRadius:11,padding:11},exampleText:{fontSize:13,lineHeight:19,color:'#454B42'},word:{backgroundColor:'#FFF',borderRadius:14,padding:14,borderWidth:1,borderColor:'#E8E6DD',gap:5},wordHead:{flexDirection:'row',justifyContent:'space-between'},wordTitle:{fontSize:16,fontWeight:'900',color:'#283529'},pos:{fontSize:10,color:'#7C8478',fontWeight:'800'},meaning:{fontSize:13,fontWeight:'700',color:'#596153'},ready:{backgroundColor:'#FFF',borderRadius:18,padding:17,borderWidth:1,borderColor:'#DDE4D8',gap:8},readyTitle:{fontSize:17,fontWeight:'900',color:'#2E4935'},button:{backgroundColor:'#294432',padding:15,borderRadius:13,alignItems:'center',marginTop:4},buttonText:{color:'#FFF',fontSize:14,fontWeight:'900'}});
