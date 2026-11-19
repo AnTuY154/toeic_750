@@ -180,6 +180,11 @@ export const vocabularySeed = [
   { word: 'shipment', meaning: 'lô hàng; việc giao hàng', pos: 'noun', example: 'Your shipment will arrive within two business days.', topic: 'Shipping' },
 ];
 
+export const allVocabulary = [
+  ...vocabularySeed,
+  ...lessonLibrary.flatMap((lesson) => lesson.vocabulary.map((word) => ({ ...word, topic: lesson.title }))),
+];
+
 export const listeningScripts = [
   {
     id: 'listening-01', part: 'Part 2 · Question–Response', level: '0–150', title: 'A meeting time',
