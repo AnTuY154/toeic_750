@@ -46,7 +46,7 @@ test('vocabulary and listening scripts include learner support', () => {
   for (let index = 0; index < listeningScripts.length; index += 1) {
     const item = listeningScripts[index]!;
     assert.ok(item.script && item.translation && item.vocabulary.length > 0);
-    if ('questions' in item) {
+    if ('questions' in item && item.questions) {
       assert.ok(item.questions.length >= 3);
       for (const question of item.questions) assert.ok(question.explanation && question.explanation.length > 20);
     }
