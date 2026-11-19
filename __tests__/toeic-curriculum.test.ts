@@ -9,9 +9,19 @@ test('roadmap covers five progressive learning milestones from 0 to 750', () => 
     assert.ok(level.lessons.length >= 4);
     assert.ok(level.outcomes.length >= 3);
   }
-  assert.equal(lessonLibrary.length, 5);
+  assert.equal(lessonLibrary.length, 20);
   for (const level of toeicLevels) {
-    assert.ok(level.lessons.some((lesson) => lessonLibrary.some((content) => content.id === lesson.id)), `missing lesson content for ${level.range}`);
+    assert.ok(level.lessons.every((lesson) => lessonLibrary.some((content) => content.id === lesson.id)), `missing lesson content for ${level.range}`);
+  }
+  for (const lesson of lessonLibrary) {
+    assert.ok(lesson.sections.length >= 3, `missing knowledge sections: ${lesson.id}`);
+    assert.ok(lesson.vocabulary.length >= 3, `missing vocabulary: ${lesson.id}`);
+    assert.ok(lesson.questions.length >= 4, `missing linked practice: ${lesson.id}`);
+    for (const question of lesson.questions) {
+      assert.ok(question.choices.length >= 3);
+      assert.ok(question.answer >= 0 && question.answer < question.choices.length);
+      assert.ok(question.explanation.length > 15);
+    }
   }
 });
 
@@ -24,7 +34,7 @@ test('starter lesson presents knowledge and examples before linked practice', ()
 
 test('vocabulary and listening scripts include learner support', () => {
   assert.ok(vocabularySeed.length >= 8);
-  assert.ok(allVocabulary.length > vocabularySeed.length);
+  assert.ok(allVocabulary.length >= 55);
   assert.ok(allVocabulary.every((item) => item.topic && item.word && item.meaning));
   assert.ok(vocabularySeed.every((item) => item.word && item.meaning && item.pos && item.example));
   assert.ok(listeningScripts.length >= 2);
