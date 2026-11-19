@@ -5,7 +5,7 @@ import { AppNav } from '@/components/AppNav';
 export default function ListeningScreen(){
  const [index,setIndex]=useState(0);const [showScript,setShowScript]=useState(false);const [answers,setAnswers]=useState<Record<number,number>>({});const [checked,setChecked]=useState<Record<number,boolean>>({});
  const current=listeningScripts[index]!;
- const questionSet='questions' in current?current.questions:[{prompt:'Choose the best response.',choices:current.choices,answer:current.answer}];
+ const questionSet=('questions' in current && current.questions?.length)?current.questions:[{prompt:'Choose the best response.',choices:current.choices,answer:current.answer}];
  function selectScript(i:number){setIndex(i);setShowScript(false);setAnswers({});setChecked({});}
  function checkQuestion(i:number){setChecked(x=>({...x,[i]:true}));}
  return <SafeAreaView style={s.safe}><View style={s.shell}><ScrollView contentContainerStyle={s.c}>
