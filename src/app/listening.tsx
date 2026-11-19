@@ -4,14 +4,14 @@ import { listeningScripts } from '@/content/toeicCurriculum';
 import { AppNav } from '@/components/AppNav';
 export default function ListeningScreen(){
  const [index,setIndex]=useState(0);const [showScript,setShowScript]=useState(false);const [answers,setAnswers]=useState<Record<number,number>>({});const [checked,setChecked]=useState<Record<number,boolean>>({});
- const current=listeningScripts[index];
+ const current=listeningScripts[index]!;
  const questionSet='questions' in current?current.questions:[{prompt:'Choose the best response.',choices:current.choices,answer:current.answer}];
  function selectScript(i:number){setIndex(i);setShowScript(false);setAnswers({});setChecked({});}
  function checkQuestion(i:number){setChecked(x=>({...x,[i]:true}));}
  return <SafeAreaView style={s.safe}><View style={s.shell}><ScrollView contentContainerStyle={s.c}>
   <Text style={s.eyebrow}>LISTENING STUDIO</Text><Text style={s.title}>Luyện nghe TOEIC</Text><Text style={s.lead}>Script tiếng Anh có phân vai, câu hỏi, bản dịch và từ vựng. Bạn tự chuyển script sang audio bằng công cụ Text-to-Speech.</Text>
   <View style={s.notice}><Text style={s.noticeTitle}>Quy trình luyện nghe</Text><Text style={s.noticeBody}>1. Mở script và tạo audio. 2. Ẩn script, nghe không nhìn lời thoại. 3. Chọn đáp án. 4. Kiểm tra và mở transcript để phân tích.</Text></View>
-  <View style={s.selector}>{listeningScripts.map((item,i)=><Pressable key={item.id} onPress={()=>selectScript(i)} style={[s.chip,index===i&&s.chipActive]}><Text style={[s.chipText,index===i&&s.chipTextActive]}>{item.part}</Text></Pressable>)}</View>
+  <View style={s.selector}>{listeningScripts.map((item,i)=>item?<Pressable key={item.id} onPress={()=>selectScript(i)} style={[s.chip,index===i&&s.chipActive]}><Text style={[s.chipText,index===i&&s.chipTextActive]}>{item.part}</Text></Pressable>:null)}</View>
   <View style={s.card}><Text style={s.level}>{current.level} · {current.part}</Text><Text style={s.cardTitle}>{current.title}</Text><Text style={s.instruction}>{current.instruction}</Text>
    <View style={s.scriptHeader}><Text style={s.scriptLabel}>SCRIPT ĐỂ TẠO AUDIO</Text><Pressable onPress={()=>setShowScript(x=>!x)}><Text style={s.toggle}>{showScript?'Ẩn transcript':'Hiện transcript'}</Text></Pressable></View>
    {showScript?<Text selectable style={s.script}>{current.script}</Text>:<View style={s.hidden}><Text style={s.hiddenTitle}>Transcript đang ẩn</Text><Text style={s.hiddenBody}>Tạo audio từ script, sau đó nghe lại mà không nhìn lời thoại.</Text></View>}
