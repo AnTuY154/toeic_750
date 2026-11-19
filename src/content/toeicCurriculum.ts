@@ -1,3 +1,19 @@
+import agent01 from './agents/agent-01-parts-of-speech';
+import agent02 from './agents/agent-02-be-do-have';
+import agent03 from './agents/agent-03-basic-workplace';
+import agent04 from './agents/agent-04-prepositions';
+import agent05 from './agents/agent-05-wh-questions';
+import agent06 from './agents/agent-06-daily-work-vocab';
+import agent07 from './agents/agent-07-passive-voice';
+import agent08 from './agents/agent-08-part3-basics';
+import agent09 from './agents/agent-09-email-basics';
+import agent10 from './agents/agent-10-conjunctions';
+import agent11 from './agents/agent-11-part4-talks';
+import agent12 from './agents/agent-12-business-collocations';
+import agent13 from './agents/agent-13-advanced-grammar';
+import agent14 from './agents/agent-14-multiple-passages';
+import agent15 from './agents/agent-15-timed-mock';
+
 export type ToeicLevel = {
   id: string;
   title: string;
@@ -13,9 +29,9 @@ export const toeicLevels: ToeicLevel[] = [
     outcomes: ['Nhận biết chủ ngữ, động từ và tân ngữ', 'Dùng được be, have, do và hiện tại đơn', 'Hiểu chỉ dẫn và câu mô tả quen thuộc'],
     lessons: [
       { id: 'sentence-basics', title: 'Cấu trúc câu tiếng Anh cơ bản', skill: 'Grammar · Reading', duration: '20 phút', status: 'ready' },
-      { id: 'parts-of-speech', title: 'Danh từ, động từ, tính từ và trạng từ', skill: 'Grammar · Part 5', duration: '25 phút', status: 'planned' },
-      { id: 'be-do-have', title: 'Động từ be, do, have', skill: 'Grammar · Listening', duration: '20 phút', status: 'planned' },
-      { id: 'basic-workplace', title: 'Từ vựng nơi làm việc cơ bản', skill: 'Vocabulary', duration: '15 phút', status: 'planned' },
+      { id: 'parts-of-speech', title: 'Danh từ, động từ, tính từ và trạng từ', skill: 'Grammar · Part 5', duration: '25 phút', status: 'ready' },
+      { id: 'be-do-have', title: 'Động từ be, do, have', skill: 'Grammar · Listening', duration: '20 phút', status: 'ready' },
+      { id: 'basic-workplace', title: 'Từ vựng nơi làm việc cơ bản', skill: 'Vocabulary', duration: '15 phút', status: 'ready' },
     ],
   },
   {
@@ -23,9 +39,9 @@ export const toeicLevels: ToeicLevel[] = [
     outcomes: ['Phân biệt hiện tại, quá khứ và tương lai', 'Dùng giới từ thời gian và địa điểm', 'Nhận diện câu hỏi Wh- và câu trả lời phù hợp'],
     lessons: [
       { id: 'basic-tenses', title: 'Các thì cơ bản trong TOEIC', skill: 'Grammar · Part 5', duration: '25 phút', status: 'ready' },
-      { id: 'prepositions', title: 'Giới từ thời gian và địa điểm', skill: 'Grammar · Part 5', duration: '20 phút', status: 'planned' },
-      { id: 'wh-questions', title: 'Wh- questions và Question–Response', skill: 'Listening · Part 2', duration: '20 phút', status: 'planned' },
-      { id: 'daily-work-vocab', title: 'Lịch làm việc và hoạt động hằng ngày', skill: 'Vocabulary', duration: '15 phút', status: 'planned' },
+      { id: 'prepositions', title: 'Giới từ thời gian và địa điểm', skill: 'Grammar · Part 5', duration: '20 phút', status: 'ready' },
+      { id: 'wh-questions', title: 'Wh- questions và Question–Response', skill: 'Listening · Part 2', duration: '20 phút', status: 'ready' },
+      { id: 'daily-work-vocab', title: 'Lịch làm việc và hoạt động hằng ngày', skill: 'Vocabulary', duration: '15 phút', status: 'ready' },
     ],
   },
   {
@@ -33,9 +49,9 @@ export const toeicLevels: ToeicLevel[] = [
     outcomes: ['Chọn đúng dạng từ theo vị trí trong câu', 'Hiểu thông tin chính trong hội thoại', 'Hoàn thành câu và đoạn văn ngắn'],
     lessons: [
       { id: 'word-forms', title: 'Word forms: noun, verb, adjective, adverb', skill: 'Reading · Part 5', duration: '25 phút', status: 'ready' },
-      { id: 'passive-voice', title: 'Câu bị động trong môi trường công sở', skill: 'Grammar · Part 5', duration: '20 phút', status: 'planned' },
-      { id: 'part3-basics', title: 'Part 3: xác định người, nơi chốn, mục đích', skill: 'Listening · Part 3', duration: '25 phút', status: 'planned' },
-      { id: 'email-basics', title: 'Email và thông báo ngắn', skill: 'Reading · Part 6', duration: '20 phút', status: 'planned' },
+      { id: 'passive-voice', title: 'Câu bị động trong môi trường công sở', skill: 'Grammar · Part 5', duration: '20 phút', status: 'ready' },
+      { id: 'part3-basics', title: 'Part 3: xác định người, nơi chốn, mục đích', skill: 'Listening · Part 3', duration: '25 phút', status: 'ready' },
+      { id: 'email-basics', title: 'Email và thông báo ngắn', skill: 'Reading · Part 6', duration: '20 phút', status: 'ready' },
     ],
   },
   {
@@ -43,19 +59,19 @@ export const toeicLevels: ToeicLevel[] = [
     outcomes: ['Xử lý mệnh đề quan hệ và liên từ', 'Theo dõi mục đích và hàm ý trong bài nghe', 'Đọc email, lịch trình và thông báo kết hợp'],
     lessons: [
       { id: 'relative-clauses', title: 'Mệnh đề quan hệ và rút gọn mệnh đề', skill: 'Grammar · Part 5', duration: '25 phút', status: 'ready' },
-      { id: 'conjunctions', title: 'Liên từ và quan hệ logic', skill: 'Grammar · Part 6', duration: '20 phút', status: 'planned' },
-      { id: 'part4-talks', title: 'Part 4: announcements và presentations', skill: 'Listening · Part 4', duration: '25 phút', status: 'planned' },
-      { id: 'business-collocations', title: 'Collocations trong công việc', skill: 'Vocabulary', duration: '20 phút', status: 'planned' },
+      { id: 'conjunctions', title: 'Liên từ và quan hệ logic', skill: 'Grammar · Part 6', duration: '20 phút', status: 'ready' },
+      { id: 'part4-talks', title: 'Part 4: announcements và presentations', skill: 'Listening · Part 4', duration: '25 phút', status: 'ready' },
+      { id: 'business-collocations', title: 'Collocations trong công việc', skill: 'Vocabulary', duration: '20 phút', status: 'ready' },
     ],
   },
   {
     id: 'level-601-750', title: 'Upper intermediate', range: '601–750', description: 'Luyện suy luận, paraphrase, nối dữ kiện và quản lý thời gian theo chiến thuật đề thi.',
     outcomes: ['Nhận diện paraphrase và distractors', 'Suy luận ý định, hàm ý và thông tin không nói trực tiếp', 'Kết nối dữ kiện từ nhiều văn bản và hội thoại'],
     lessons: [
-      { id: 'advanced-grammar', title: 'Cấu trúc nâng cao và bẫy ngữ pháp', skill: 'Reading · Part 5–6', duration: '30 phút', status: 'planned' },
+      { id: 'advanced-grammar', title: 'Cấu trúc nâng cao và bẫy ngữ pháp', skill: 'Reading · Part 5–6', duration: '30 phút', status: 'ready' },
       { id: 'paraphrase-inference', title: 'Paraphrase, inference và distractors', skill: 'Listening · Reading', duration: '30 phút', status: 'ready' },
-      { id: 'multiple-passages', title: 'Part 7: double và triple passages', skill: 'Reading · Part 7', duration: '35 phút', status: 'planned' },
-      { id: 'timed-mock', title: 'Chiến thuật làm bài 120 phút', skill: 'Full test', duration: '45 phút', status: 'planned' },
+      { id: 'multiple-passages', title: 'Part 7: double và triple passages', skill: 'Reading · Part 7', duration: '35 phút', status: 'ready' },
+      { id: 'timed-mock', title: 'Chiến thuật làm bài 120 phút', skill: 'Full test', duration: '45 phút', status: 'ready' },
     ],
   },
 ];
@@ -165,7 +181,25 @@ export const additionalLessons = [
   },
 ];
 
-export const lessonLibrary = [starterLesson, ...additionalLessons];
+export const specialistLessons = [
+  agent01,
+  agent02,
+  agent03,
+  agent04,
+  agent05,
+  agent06,
+  agent07,
+  agent08,
+  agent09,
+  agent10,
+  agent11,
+  agent12,
+  agent13,
+  agent14,
+  agent15
+];
+
+export const lessonLibrary = [starterLesson, ...additionalLessons, ...specialistLessons];
 
 export const vocabularySeed = [
   { word: 'appointment', meaning: 'cuộc hẹn', pos: 'noun', example: 'I have an appointment with the client at 10 a.m.', topic: 'Schedule' },
