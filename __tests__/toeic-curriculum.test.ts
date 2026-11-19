@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { lessonLibrary, listeningScripts, practiceQuestions, starterLesson, toeicLevels, vocabularySeed } from '../src/content/toeicCurriculum.ts';
+import { allVocabulary, lessonLibrary, listeningScripts, practiceQuestions, starterLesson, toeicLevels, vocabularySeed } from '../src/content/toeicCurriculum.ts';
 
 test('roadmap covers five progressive learning milestones from 0 to 750', () => {
   assert.equal(toeicLevels.length, 5);
@@ -24,6 +24,8 @@ test('starter lesson presents knowledge and examples before linked practice', ()
 
 test('vocabulary and listening scripts include learner support', () => {
   assert.ok(vocabularySeed.length >= 8);
+  assert.ok(allVocabulary.length > vocabularySeed.length);
+  assert.ok(allVocabulary.every((item) => item.topic && item.word && item.meaning));
   assert.ok(vocabularySeed.every((item) => item.word && item.meaning && item.pos && item.example));
   assert.ok(listeningScripts.length >= 2);
   assert.ok(listeningScripts.every((item) => item.script && item.translation && item.vocabulary.length > 0));
