@@ -1,57 +1,58 @@
-# 750 Lab — Adaptive TOEIC Learning
+# 750 Lab — TOEIC Learning Platform
 
-A local-first React Native / Expo project for building a personal TOEIC learning system over time.
+A Vietnamese-first TOEIC Listening & Reading learning website built with Expo, React Native Web and Expo Router.
 
-> This app is not affiliated with or endorsed by ETS. TOEIC is a trademark of ETS.
+## Learning principles
 
-## Current milestone: Day 0 baseline diagnostic
+Every lesson follows the same order:
 
-The repository starts with diagnostic infrastructure only. **Today is not treated as a Daily Knowledge Day**, so the app does not create a Daily Learning Pack or end-of-day knowledge summary yet.
+1. **Knowledge first** — explain the grammar, vocabulary or test skill.
+2. **Examples** — show how the rule appears in workplace English.
+3. **Practice** — answer questions tied to the lesson just studied.
+4. **Feedback** — show the correct answer and explain why each choice works or fails.
+5. **Review** — revisit weak concepts and vocabulary.
 
-Implemented in this foundation:
+## Learning roadmap
 
-- Expo Router + TypeScript strict mode
-- Expo SQLite persistence
-- original Reading baseline questions across Parts 5, 6 and 7
-- answer + confidence + response-time capture
-- skill-level evidence aggregation
-- explicit `insufficient_evidence` state
-- no fake raw-to-scaled TOEIC conversion
-- CI skeleton and EAS profiles
+The site groups learning into five pedagogical stages:
 
-Listening is deliberately not inferred from Reading performance. A later diagnostic update will add real-audio input and targeted listening error probes. Until then, the app reports the baseline as `reading_only` rather than claiming an overall TOEIC level.
+- 0–150: Foundation — sentence structure, parts of speech, basic workplace vocabulary.
+- 151–300: Beginner — basic tenses, prepositions, question-response.
+- 301–450: Elementary+ — word forms, passive voice, short conversations and text completion.
+- 451–600: Intermediate — clauses, conjunctions, talks, collocations and linked information.
+- 601–750: Upper intermediate — paraphrase, inference, distractors, multiple passages and timed practice.
 
-## Stack
+These are learning milestones designed by 750 Lab, **not official ETS score bands**. The official TOEIC Listening & Reading score range is 10–990; Listening and Reading are reported separately.
 
-- Expo SDK 57
-- React Native 0.86
-- React 19.2
-- Expo Router
-- Expo SQLite
-- TypeScript strict
-- ESLint
-- Node built-in unit tests
+## Main sections
 
-## Run locally
+- Home dashboard and learning roadmap
+- Knowledge library, grouped by level
+- Lesson view with theory, examples and vocabulary before its linked exercise
+- Practice with answer feedback and score summary
+- Vocabulary flashcards with meaning, part of speech, topic and example
+- Listening studio with speaker-labelled scripts, questions, translation and vocabulary. Scripts are provided for the learner to convert to audio with their preferred text-to-speech tool.
+
+## TOEIC format reference
+
+The standard TOEIC Listening & Reading test has 200 multiple-choice questions:
+- Listening: 100 questions, approximately 45 minutes (Parts 1–4)
+- Reading: 100 questions, 75 minutes (Parts 5–7)
+
+Reference: https://www.ets.org/toeic/about/listening-reading.html
+
+All learning content and practice questions in this project are original study material and are not presented as official ETS questions. TOEIC is a registered trademark of ETS. This project is not affiliated with or endorsed by ETS.
+
+## Development
+
+Requires Node.js >= 22.13.
 
 ```bash
 npm install
 npm run typecheck
 npm run lint
 npm test
-npx expo start
+npm run build:web
 ```
 
-## Android preview build
-
-```bash
-npx eas build --platform android --profile preview
-```
-
-The `preview` profile outputs an APK suitable for direct installation when EAS credentials/project configuration are available.
-
-## Development model
-
-Day 0: baseline diagnostic only.
-
-From the first knowledge file onward, each learning day will be layered onto this same repository and database with migrations, Daily Packs, retrieval practice, review scheduling, error history and regression protection.
+The web export is configured for GitHub Pages at `/toeic_750`.
