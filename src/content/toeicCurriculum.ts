@@ -246,7 +246,7 @@ export const listeningScripts = [
     explanation: 'Câu đầu nêu mục đích cuộc gọi (confirm your appointment). Lịch hẹn được đổi sang Friday at ten fifteen.',
     translation: 'Người phụ nữ gọi để xác nhận lịch hẹn nha khoa. Người đàn ông đề nghị chuyển sang sáng thứ Sáu lúc 10:15.',
     vocabulary: ['confirm: xác nhận', 'appointment: cuộc hẹn', 'opening: khung giờ còn trống'],
-  },,
+  },
   {
     id: 'listening-03', part: 'Part 4 · Announcement', level: '451–600', title: 'Office maintenance notice',
     instruction: 'Chuyển script thành audio với một giọng đọc thông báo rõ ràng. Nghe để xác định địa điểm, thời gian và việc người nghe cần làm.',
