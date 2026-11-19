@@ -27,7 +27,7 @@ These are learning milestones designed by 750 Lab, **not official ETS score band
 ## Main sections
 
 - Home dashboard and learning roadmap
-- Knowledge library, grouped by level, with one complete starter lesson for each of the five milestones
+- Knowledge library, grouped by level, with all 20 lesson packs available across the five milestones
 - Lesson view with theory, examples and vocabulary before its linked exercise
 - Practice with answer feedback and score summary
 - Vocabulary flashcards aggregated from lesson vocabulary, with meaning, part of speech, topic and example
