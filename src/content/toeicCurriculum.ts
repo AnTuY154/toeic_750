@@ -98,6 +98,7 @@ export const starterLesson = {
     { prompt: 'The marketing team _____ a new campaign every quarter.', choices: ['launch', 'launches', 'launching', 'launched'], answer: 1, explanation: 'The marketing team là chủ ngữ số ít; câu diễn tả thói quen nên dùng hiện tại đơn launches.' },
     { prompt: 'All employees must submit the _____ by noon.', choices: ['complete', 'completed', 'completion', 'completes'], answer: 2, explanation: 'Sau the cần danh từ. Completion là danh từ, nghĩa là sự hoàn thành.' },
     { prompt: 'The new branch _____ near the central station.', choices: ['is located', 'locating', 'location', 'locate'], answer: 0, explanation: 'Câu cần động từ chính. is located là cấu trúc bị động/mô tả vị trí phù hợp với chủ ngữ số ít.' },
+    { prompt: 'The new employees _____ orientation on Monday.', choices: ['attend', 'attends', 'attended', 'attending'], answer: 0, explanation: 'Employees là chủ ngữ số nhiều; hiện tại đơn dùng attend.' },
   ],
 };
 
@@ -120,6 +121,7 @@ export const additionalLessons = [
       { prompt: 'The office usually _____ at 8:30 a.m.', choices: ['open', 'opens', 'opened', 'opening'], answer: 1, explanation: 'Usually diễn tả thói quen; the office là chủ ngữ số ít nên dùng opens.' },
       { prompt: 'The shipment _____ yesterday afternoon.', choices: ['arrives', 'has arrived', 'arrived', 'will arrive'], answer: 2, explanation: 'Yesterday afternoon là mốc quá khứ đã kết thúc, dùng quá khứ đơn arrived.' },
       { prompt: 'The company _____ two new branches since March.', choices: ['opens', 'opened', 'has opened', 'will open'], answer: 2, explanation: 'Since + mốc thời gian thường đi với hiện tại hoàn thành để diễn tả kết quả kéo dài đến hiện tại.' },
+      { prompt: 'The director _____ the results tomorrow.', choices: ['announces', 'announced', 'will announce', 'announcing'], answer: 2, explanation: 'Tomorrow là dấu hiệu tương lai; will + động từ nguyên mẫu.' },
     ],
   },
   {
@@ -139,6 +141,7 @@ export const additionalLessons = [
       { prompt: 'The accounting team checked the figures for _____.', choices: ['accurate', 'accuracy', 'accurately', 'accuracies'], answer: 1, explanation: 'Sau giới từ for cần danh từ; accuracy là danh từ.' },
       { prompt: 'All applications must be completed _____.', choices: ['accurate', 'accuracy', 'accurately', 'accuracies'], answer: 2, explanation: 'Bổ nghĩa cho động từ completed cần trạng từ accurately.' },
       { prompt: 'The company introduced an _____ system for tracking orders.', choices: ['efficiency', 'efficient', 'efficiently', 'efficiencies'], answer: 1, explanation: 'Chỗ trống đứng trước danh từ system nên cần tính từ efficient.' },
+      { prompt: 'The assistant prepared the report _____.', choices: ['accurate', 'accuracy', 'accurately', 'accuracies'], answer: 2, explanation: 'Bổ nghĩa cho động từ prepared cần trạng từ accurately.' },
     ],
   },
   {
@@ -158,6 +161,7 @@ export const additionalLessons = [
       { prompt: 'The consultant _____ prepared the proposal will attend the meeting.', choices: ['who', 'where', 'whose', 'which'], answer: 0, explanation: 'Danh từ đứng trước là người (consultant) và đại từ làm chủ ngữ của prepared, nên dùng who.' },
       { prompt: 'The new branch, _____ opened last month, is already profitable.', choices: ['that', 'who', 'which', 'whose'], answer: 2, explanation: 'Mệnh đề không xác định có dấu phẩy, nói về vật/chi nhánh nên dùng which, không dùng that.' },
       { prompt: 'Candidates _____ after the deadline will not be considered.', choices: ['submit', 'submitting', 'submitted', 'submission'], answer: 2, explanation: 'Documents/candidates được nộp là ý bị động; dạng rút gọn phù hợp là submitted.' },
+      { prompt: 'The files _____ by the legal team are confidential.', choices: ['review', 'reviewing', 'reviewed', 'reviewer'], answer: 2, explanation: 'Files được nhóm pháp lý xem xét, nên dùng phân từ quá khứ reviewed để rút gọn mệnh đề bị động.' },
     ],
   },
   {
@@ -177,6 +181,7 @@ export const additionalLessons = [
       { prompt: 'The manager said the product launch would be postponed. What does this mean?', choices: ['The launch will happen earlier.', 'The launch will take place later.', 'The product has been discontinued.', 'The launch has already started.'], answer: 1, explanation: 'Postponed được diễn đạt lại là delayed hoặc put off: sự kiện sẽ diễn ra muộn hơn.' },
       { prompt: '“I have already sent the revised contract to the client.” What can be inferred?', choices: ['The contract has been updated and sent.', 'The client rejected the contract.', 'The contract is still being drafted.', 'The client will send a new contract.'], answer: 0, explanation: 'Revised contract cho biết hợp đồng đã được chỉnh sửa; have sent cho biết đã gửi đi.' },
       { prompt: 'A speaker says, “The printer is out of order, so I will use the one on the third floor.” What will the speaker probably do?', choices: ['Repair the printer immediately.', 'Buy a new printer.', 'Print documents on another floor.', 'Cancel the printing request.'], answer: 2, explanation: 'Out of order nghĩa là hỏng/không hoạt động; người nói sẽ dùng máy in ở tầng ba.' },
+      { prompt: 'The meeting was called off. What does this mean?', choices: ['It was canceled.', 'It was extended.', 'It started early.', 'It was moved online.'], answer: 0, explanation: 'Called off là cách diễn đạt tương đương với canceled: cuộc họp đã bị hủy.' },
     ],
   },
 ];
