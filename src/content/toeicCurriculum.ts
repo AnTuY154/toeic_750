@@ -234,9 +234,9 @@ export const listeningScripts = [
     instruction: 'Tạo audio có hai giọng đọc khác nhau. Đọc hội thoại tự nhiên, tốc độ vừa phải.',
     script: 'Woman: Hello, this is Dana from Greenway Dental. I’m calling to confirm your appointment for Thursday at two.\nMan: Thanks for calling. Could we move it to Friday morning?\nWoman: Certainly. We have an opening at ten fifteen.\nMan: That works. Please send me a confirmation by email.',
     questions: [
-      { prompt: 'Why is the woman calling?', choices: ['To confirm an appointment', 'To request a payment', 'To cancel an order', 'To offer a discount'], answer: 0 },
-      { prompt: 'When will the man visit the clinic?', choices: ['Thursday at two', 'Friday at ten fifteen', 'Friday afternoon', 'Monday morning'], answer: 1 },
-      { prompt: 'What does the man ask the woman to do?', choices: ['Send a confirmation by email', 'Call him next week', 'Prepare a medical report', 'Change the clinic location'], answer: 0 },
+      { prompt: 'Why is the woman calling?', choices: ['To confirm an appointment', 'To request a payment', 'To cancel an order', 'To offer a discount'], answer: 0, explanation: 'The caller says she is calling to confirm the appointment, so option A matches the stated purpose.' },
+      { prompt: 'When will the man visit the clinic?', choices: ['Thursday at two', 'Friday at ten fifteen', 'Friday afternoon', 'Monday morning'], answer: 1, explanation: 'The woman offers an opening at ten fifteen on Friday, and the man accepts it.' },
+      { prompt: 'What does the man ask the woman to do?', choices: ['Send a confirmation by email', 'Call him next week', 'Prepare a medical report', 'Change the clinic location'], answer: 0, explanation: 'The final line is “Please send me a confirmation by email,” which directly supports option A.' },
     ],
     explanation: 'Câu đầu nêu mục đích cuộc gọi (confirm your appointment). Lịch hẹn được đổi sang Friday at ten fifteen.',
     translation: 'Người phụ nữ gọi để xác nhận lịch hẹn nha khoa. Người đàn ông đề nghị chuyển sang sáng thứ Sáu lúc 10:15.',
