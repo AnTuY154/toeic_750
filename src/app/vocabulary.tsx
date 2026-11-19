@@ -1,178 +1,22 @@
 import { useMemo, useState } from 'react';
 import { Pressable, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { vocabularySeed } from '@/content/toeicCurriculum';
 import { AppNav } from '@/components/AppNav';
-import { allVocabulary, vocabularyDays, type VocabularyCard } from '@/content/vocabulary';
-
-type Rating = 'known' | 'review';
-type DayFilter = 'all' | number;
-const STORAGE_KEY = 'toeic750.vocabulary.ratings.v1';
-
-function readRatings(): Record<string, Rating> {
-  if (typeof localStorage === 'undefined') return {};
-  try {
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? (JSON.parse(raw) as Record<string, Rating>) : {};
-  } catch {
-    return {};
-  }
+export default function VocabularyScreen(){
+ const [index,setIndex]=useState(0);const [revealed,setRevealed]=useState(false);const [known,setKnown]=useState<string[]>([]);const [review,setReview]=useState<string[]>([]);
+ const word=vocabularySeed[index];const progress=known.length;
+ function next(){setIndex(x=>(x+1)%vocabularySeed.length);setRevealed(false);}
+ function rate(type:'known'|'review'){if(type==='known')setKnown(x=>x.includes(word.word)?x:[...x,word.word]);else setReview(x=>x.includes(word.word)?x:[...x,word.word]);next();}
+ return <SafeAreaView style={s.safe}><View style={s.shell}><ScrollView contentContainerStyle={s.c}>
+  <Text style={s.eyebrow}>VOCABULARY BUILDER</Text><Text style={s.title}>Từ mới TOEIC</Text><Text style={s.lead}>Học từ theo ngữ cảnh công việc. Mỗi từ có nghĩa, từ loại, chủ đề và ví dụ.</Text>
+  <View style={s.stats}><View style={s.stat}><Text style={s.big}>{vocabularySeed.length}</Text><Text style={s.small}>Từ trong bộ mẫu</Text></View><View style={s.stat}><Text style={s.big}>{progress}</Text><Text style={s.small}>Đã biết</Text></View><View style={s.stat}><Text style={s.big}>{review.length}</Text><Text style={s.small}>Cần ôn</Text></View></View>
+  <View style={s.deckMeta}><Text style={s.topic}>{word.topic.toUpperCase()}</Text><Text style={s.count}>{index+1} / {vocabularySeed.length}</Text></View>
+  <Pressable style={[s.card,revealed&&s.cardOpen]} onPress={()=>setRevealed(x=>!x)}>
+   {!revealed?<View style={s.center}><Text style={s.hint}>CHẠM ĐỂ XEM NGHĨA</Text><Text style={s.word}>{word.word}</Text><Text style={s.pos}>{word.pos}</Text></View>:<View style={s.answer}><Text style={s.answerWord}>{word.word}</Text><Text style={s.meaning}>{word.meaning}</Text><Text style={s.label}>VÍ DỤ TRONG TOEIC</Text><Text style={s.example}>{word.example}</Text><Text style={s.hint}>Chạm để ẩn nghĩa</Text></View>}
+  </Pressable>
+  <View style={s.actions}><Pressable style={s.reviewBtn} onPress={()=>rate('review')}><Text style={s.reviewText}>Cần ôn lại</Text></Pressable><Pressable style={s.knownBtn} onPress={()=>rate('known')}><Text style={s.knownText}>Đã nhớ ✓</Text></Pressable></View>
+  <View style={s.nav}><Pressable style={s.navBtn} onPress={()=>{setIndex(x=>(x-1+vocabularySeed.length)%vocabularySeed.length);setRevealed(false);}}><Text style={s.navText}>← Trước</Text></Pressable><Pressable style={s.navBtn} onPress={next}><Text style={s.navText}>Tiếp theo →</Text></Pressable></View>
+  <Text style={s.section}>Danh sách từ trong bộ này</Text>{vocabularySeed.map((item,i)=><Pressable key={item.word} onPress={()=>{setIndex(i);setRevealed(true);}} style={s.row}><View style={s.flex}><Text style={s.rowWord}>{item.word}</Text><Text style={s.rowMeta}>{item.topic} · {item.pos}</Text></View><Text style={s.rowMeaning}>{item.meaning}</Text></Pressable>)}
+ </ScrollView><AppNav/></View></SafeAreaView>
 }
-
-function saveRatings(value: Record<string, Rating>) {
-  if (typeof localStorage === 'undefined') return;
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(value));
-}
-
-export default function VocabularyScreen() {
-  const [filter, setFilter] = useState<DayFilter>('all');
-  const [index, setIndex] = useState(0);
-  const [revealed, setRevealed] = useState(false);
-  const [ratings, setRatings] = useState<Record<string, Rating>>(() => readRatings());
-
-  const cards = useMemo(() => {
-    if (filter === 'all') return allVocabulary;
-    return vocabularyDays.find((item) => item.day === filter)?.cards ?? [];
-  }, [filter]);
-
-  const card: VocabularyCard | undefined = cards[index];
-  const known = allVocabulary.filter((item) => ratings[item.id] === 'known').length;
-  const review = allVocabulary.filter((item) => ratings[item.id] === 'review').length;
-
-  function chooseFilter(next: DayFilter) {
-    setFilter(next);
-    setIndex(0);
-    setRevealed(false);
-  }
-
-  function nextCard() {
-    if (cards.length === 0) return;
-    setIndex((value) => (value + 1) % cards.length);
-    setRevealed(false);
-  }
-
-  function previousCard() {
-    if (cards.length === 0) return;
-    setIndex((value) => (value - 1 + cards.length) % cards.length);
-    setRevealed(false);
-  }
-
-  function rate(value: Rating) {
-    if (!card) return;
-    const next = { ...ratings, [card.id]: value };
-    setRatings(next);
-    saveRatings(next);
-    nextCard();
-  }
-
-  return (
-    <SafeAreaView style={s.safe}>
-      <View style={s.shell}>
-        <ScrollView contentContainerStyle={s.c}>
-          <Text style={s.eyebrow}>VOCABULARY</Text>
-          <Text style={s.title}>Flashcards</Text>
-          <Text style={s.body}>Từ vựng được lấy trực tiếp từ nội dung từng ngày đã có trong 750 Lab.</Text>
-
-          <View style={s.stats}>
-            <View style={s.stat}><Text style={s.statBig}>{allVocabulary.length}</Text><Text style={s.statLabel}>Words</Text></View>
-            <View style={s.stat}><Text style={s.statBig}>{known}</Text><Text style={s.statLabel}>Known</Text></View>
-            <View style={s.stat}><Text style={s.statBig}>{review}</Text><Text style={s.statLabel}>Review</Text></View>
-          </View>
-
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={s.filters}>
-            <Pressable onPress={() => chooseFilter('all')} style={[s.chip, filter === 'all' && s.chipActive]}>
-              <Text style={[s.chipText, filter === 'all' && s.chipTextActive]}>All · {allVocabulary.length}</Text>
-            </Pressable>
-            {vocabularyDays.map((item) => (
-              <Pressable key={item.day} onPress={() => chooseFilter(item.day)} style={[s.chip, filter === item.day && s.chipActive]}>
-                <Text style={[s.chipText, filter === item.day && s.chipTextActive]}>D{item.day} · {item.cards.length}</Text>
-              </Pressable>
-            ))}
-          </ScrollView>
-
-          {card ? (
-            <>
-              <View style={s.deckMeta}>
-                <Text style={s.deckDay}>DAY {card.day}</Text>
-                <Text style={s.deckCount}>{index + 1} / {cards.length}</Text>
-              </View>
-
-              <Pressable style={[s.card, revealed && s.cardBack]} onPress={() => setRevealed((value) => !value)}>
-                {!revealed ? (
-                  <View style={s.cardCenter}>
-                    <Text style={s.tap}>TAP TO REVEAL</Text>
-                    <Text style={s.word}>{card.word}</Text>
-                    <Text style={s.pos}>{card.pos}</Text>
-                    <Text style={s.currentRating}>
-                      {ratings[card.id] === 'known' ? '✓ Known' : ratings[card.id] === 'review' ? '↻ Review again' : 'Not rated'}
-                    </Text>
-                  </View>
-                ) : (
-                  <View style={s.answer}>
-                    <Text style={s.backWord}>{card.word}</Text>
-                    <Text style={s.meaning}>{card.meaning}</Text>
-                    <View style={s.divider} />
-                    <Text style={s.label}>CHUNKS</Text>
-                    <Text style={s.detail}>{card.chunks.join(' · ')}</Text>
-                    {'family' in card && card.family ? <><Text style={s.label}>WORD FAMILY</Text><Text style={s.detail}>{card.family}</Text></> : null}
-                    <Text style={s.label}>EXAMPLE</Text>
-                    <Text style={s.example}>{card.example}</Text>
-                    {'note' in card && card.note ? <Text style={s.note}>{card.note}</Text> : null}
-                    <Text style={s.tapBottom}>Tap card to see the word again</Text>
-                  </View>
-                )}
-              </Pressable>
-
-              <View style={s.navRow}>
-                <Pressable style={s.secondaryButton} onPress={previousCard}><Text style={s.secondaryText}>← Previous</Text></Pressable>
-                <Pressable style={s.secondaryButton} onPress={nextCard}><Text style={s.secondaryText}>Next →</Text></Pressable>
-              </View>
-
-              <View style={s.ratingRow}>
-                <Pressable style={s.reviewButton} onPress={() => rate('review')}><Text style={s.reviewText}>↻ Review again</Text></Pressable>
-                <Pressable style={s.knownButton} onPress={() => rate('known')}><Text style={s.knownText}>✓ Know it</Text></Pressable>
-              </View>
-            </>
-          ) : (
-            <View style={s.empty}>
-              <Text style={s.emptyTitle}>Day {filter} chưa có vocabulary data</Text>
-              <Text style={s.body}>Khi lesson của ngày này được gửi cho mình, từ vựng sẽ tự được thêm vào deck Day 1–7 mà không cần tạo page mới.</Text>
-            </View>
-          )}
-
-          <View style={s.sourceNote}>
-            <Text style={s.sourceTitle}>Coverage hiện tại</Text>
-            {vocabularyDays.map((item) => (
-              <View key={item.day} style={s.coverageRow}>
-                <Text style={s.coverageDay}>Day {item.day}</Text>
-                <Text style={item.status === 'ready' ? s.ready : s.waiting}>
-                  {item.status === 'ready' ? `${item.cards.length} words · ready` : '0 words · waiting for lesson'}
-                </Text>
-              </View>
-            ))}
-          </View>
-        </ScrollView>
-        <AppNav />
-      </View>
-    </SafeAreaView>
-  );
-}
-
-const s = StyleSheet.create({
-  safe:{flex:1,backgroundColor:'#F7F7F4'}, shell:{flex:1}, c:{padding:20,gap:15,paddingBottom:28},
-  eyebrow:{fontSize:12,letterSpacing:1.3,fontWeight:'900',color:'#777'}, title:{fontSize:34,fontWeight:'900',color:'#171717'},
-  body:{fontSize:14,lineHeight:21,color:'#60605A'}, stats:{flexDirection:'row',gap:8},
-  stat:{flex:1,backgroundColor:'#FFF',borderRadius:15,padding:13,borderWidth:1,borderColor:'#E7E7E0'}, statBig:{fontSize:21,fontWeight:'900'}, statLabel:{fontSize:10,color:'#777',fontWeight:'800',marginTop:2},
-  filters:{gap:7,paddingVertical:2}, chip:{paddingVertical:9,paddingHorizontal:12,borderRadius:99,backgroundColor:'#FFF',borderWidth:1,borderColor:'#DEDED7'},
-  chipActive:{backgroundColor:'#171717',borderColor:'#171717'}, chipText:{fontSize:11,fontWeight:'800',color:'#555'}, chipTextActive:{color:'#FFF'},
-  deckMeta:{flexDirection:'row',justifyContent:'space-between',alignItems:'center'}, deckDay:{fontSize:11,letterSpacing:1,fontWeight:'900',color:'#777'}, deckCount:{fontSize:12,fontWeight:'900'},
-  card:{minHeight:330,backgroundColor:'#171717',borderRadius:28,padding:24,justifyContent:'center'}, cardBack:{backgroundColor:'#FFF',borderWidth:1,borderColor:'#E2E2DB',justifyContent:'flex-start'},
-  cardCenter:{alignItems:'center',gap:10}, tap:{fontSize:10,letterSpacing:1.4,color:'#888',fontWeight:'900'}, word:{fontSize:40,lineHeight:48,color:'#FFF',fontWeight:'900',textAlign:'center'}, pos:{fontSize:13,color:'#BDBDB6',fontWeight:'800'}, currentRating:{fontSize:11,color:'#8F8F88',marginTop:14,fontWeight:'700'},
-  answer:{gap:9}, backWord:{fontSize:29,fontWeight:'900'}, meaning:{fontSize:19,lineHeight:27,fontWeight:'800'}, divider:{height:1,backgroundColor:'#E6E6DF',marginVertical:4},
-  label:{fontSize:9,letterSpacing:1.2,fontWeight:'900',color:'#8A8A82',marginTop:3}, detail:{fontSize:14,lineHeight:20,fontWeight:'700',color:'#383833'}, example:{fontSize:14,lineHeight:21,fontStyle:'italic',color:'#555'},
-  note:{fontSize:12,lineHeight:18,color:'#65572E',backgroundColor:'#FFF3CE',padding:10,borderRadius:10}, tapBottom:{fontSize:10,color:'#999',marginTop:8,textAlign:'center'},
-  navRow:{flexDirection:'row',gap:8}, secondaryButton:{flex:1,padding:13,borderRadius:13,backgroundColor:'#ECECE6',alignItems:'center'}, secondaryText:{fontSize:12,fontWeight:'900'},
-  ratingRow:{flexDirection:'row',gap:8}, reviewButton:{flex:1,padding:15,borderRadius:14,backgroundColor:'#FFF',borderWidth:1,borderColor:'#D6D6CF',alignItems:'center'}, reviewText:{fontSize:13,fontWeight:'900',color:'#555'},
-  knownButton:{flex:1,padding:15,borderRadius:14,backgroundColor:'#171717',alignItems:'center'}, knownText:{fontSize:13,fontWeight:'900',color:'#FFF'},
-  empty:{backgroundColor:'#FFF',borderRadius:22,padding:22,gap:8,borderWidth:1,borderColor:'#E5E5E0'}, emptyTitle:{fontSize:20,fontWeight:'900'},
-  sourceNote:{backgroundColor:'#ECECE6',borderRadius:18,padding:16,gap:8}, sourceTitle:{fontSize:14,fontWeight:'900'}, coverageRow:{flexDirection:'row',justifyContent:'space-between',gap:10},
-  coverageDay:{fontSize:12,fontWeight:'800'}, ready:{fontSize:11,fontWeight:'800',color:'#3D6C42'}, waiting:{fontSize:11,fontWeight:'800',color:'#8A7140'}
-});
+const s=StyleSheet.create({safe:{flex:1,backgroundColor:'#F5F4EF'},shell:{flex:1,maxWidth:900,width:'100%',alignSelf:'center'},c:{padding:20,gap:13,paddingBottom:30},eyebrow:{fontSize:10,letterSpacing:1.4,fontWeight:'900',color:'#71816B'},title:{fontSize:30,fontWeight:'900',color:'#20251F'},lead:{fontSize:13,lineHeight:21,color:'#6C7068'},stats:{flexDirection:'row',gap:8},stat:{flex:1,backgroundColor:'#FFF',borderRadius:14,padding:12,borderWidth:1,borderColor:'#E8E6DD'},big:{fontSize:21,fontWeight:'900',color:'#304A38'},small:{fontSize:10,color:'#82867C',marginTop:3},deckMeta:{flexDirection:'row',justifyContent:'space-between',marginTop:5},topic:{fontSize:10,fontWeight:'900',letterSpacing:1,color:'#71816B'},count:{fontSize:11,fontWeight:'800',color:'#85877E'},card:{minHeight:235,backgroundColor:'#263F32',borderRadius:23,padding:22,justifyContent:'center'},cardOpen:{backgroundColor:'#FFF',borderWidth:1,borderColor:'#E8E6DD',justifyContent:'flex-start'},center:{alignItems:'center',gap:10},hint:{fontSize:9,letterSpacing:1.2,color:'#AFC1AA',fontWeight:'900'},word:{fontSize:34,fontWeight:'900',color:'#FFF',textAlign:'center'},pos:{fontSize:12,color:'#D5E0D1',fontWeight:'800'},answer:{gap:10},answerWord:{fontSize:27,fontWeight:'900',color:'#263F32'},meaning:{fontSize:19,fontWeight:'800',color:'#333D33'},label:{fontSize:9,letterSpacing:1,fontWeight:'900',color:'#8A9285'},example:{fontSize:14,lineHeight:22,color:'#50594E',fontStyle:'italic'},actions:{flexDirection:'row',gap:8},reviewBtn:{flex:1,padding:14,borderRadius:13,borderWidth:1,borderColor:'#D8D9D0',alignItems:'center',backgroundColor:'#FFF'},knownBtn:{flex:1,padding:14,borderRadius:13,backgroundColor:'#294432',alignItems:'center'},reviewText:{fontSize:12,fontWeight:'900',color:'#666'},knownText:{fontSize:12,fontWeight:'900',color:'#FFF'},nav:{flexDirection:'row',justifyContent:'space-between'},navBtn:{padding:10},navText:{fontSize:12,fontWeight:'800',color:'#64745F'},section:{fontSize:18,fontWeight:'900',color:'#283229',marginTop:7},row:{backgroundColor:'#FFF',borderRadius:13,padding:13,flexDirection:'row',alignItems:'center',gap:10,borderWidth:1,borderColor:'#E8E6DD'},flex:{flex:1},rowWord:{fontSize:13,fontWeight:'900',color:'#283229'},rowMeta:{fontSize:10,color:'#888E82',marginTop:3},rowMeaning:{fontSize:11,color:'#626A5F'}});
