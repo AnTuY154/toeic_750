@@ -22,7 +22,7 @@ export const toeicLevels: ToeicLevel[] = [
     id: 'level-151-300', title: 'Beginner', range: '151–300', description: 'Mở rộng ngữ pháp nền, cụm từ thông dụng và phản xạ nghe hỏi–đáp.',
     outcomes: ['Phân biệt hiện tại, quá khứ và tương lai', 'Dùng giới từ thời gian và địa điểm', 'Nhận diện câu hỏi Wh- và câu trả lời phù hợp'],
     lessons: [
-      { id: 'basic-tenses', title: 'Các thì cơ bản trong TOEIC', skill: 'Grammar · Part 5', duration: '25 phút', status: 'planned' },
+      { id: 'basic-tenses', title: 'Các thì cơ bản trong TOEIC', skill: 'Grammar · Part 5', duration: '25 phút', status: 'ready' },
       { id: 'prepositions', title: 'Giới từ thời gian và địa điểm', skill: 'Grammar · Part 5', duration: '20 phút', status: 'planned' },
       { id: 'wh-questions', title: 'Wh- questions và Question–Response', skill: 'Listening · Part 2', duration: '20 phút', status: 'planned' },
       { id: 'daily-work-vocab', title: 'Lịch làm việc và hoạt động hằng ngày', skill: 'Vocabulary', duration: '15 phút', status: 'planned' },
@@ -32,7 +32,7 @@ export const toeicLevels: ToeicLevel[] = [
     id: 'level-301-450', title: 'Elementary+', range: '301–450', description: 'Làm chủ dạng bài phổ biến, word forms, câu bị động và hội thoại ngắn.',
     outcomes: ['Chọn đúng dạng từ theo vị trí trong câu', 'Hiểu thông tin chính trong hội thoại', 'Hoàn thành câu và đoạn văn ngắn'],
     lessons: [
-      { id: 'word-forms', title: 'Word forms: noun, verb, adjective, adverb', skill: 'Reading · Part 5', duration: '25 phút', status: 'planned' },
+      { id: 'word-forms', title: 'Word forms: noun, verb, adjective, adverb', skill: 'Reading · Part 5', duration: '25 phút', status: 'ready' },
       { id: 'passive-voice', title: 'Câu bị động trong môi trường công sở', skill: 'Grammar · Part 5', duration: '20 phút', status: 'planned' },
       { id: 'part3-basics', title: 'Part 3: xác định người, nơi chốn, mục đích', skill: 'Listening · Part 3', duration: '25 phút', status: 'planned' },
       { id: 'email-basics', title: 'Email và thông báo ngắn', skill: 'Reading · Part 6', duration: '20 phút', status: 'planned' },
@@ -42,7 +42,7 @@ export const toeicLevels: ToeicLevel[] = [
     id: 'level-451-600', title: 'Intermediate', range: '451–600', description: 'Tăng độ chính xác với mệnh đề, liên từ, collocations và bài đọc nhiều thông tin.',
     outcomes: ['Xử lý mệnh đề quan hệ và liên từ', 'Theo dõi mục đích và hàm ý trong bài nghe', 'Đọc email, lịch trình và thông báo kết hợp'],
     lessons: [
-      { id: 'relative-clauses', title: 'Mệnh đề quan hệ và rút gọn mệnh đề', skill: 'Grammar · Part 5', duration: '25 phút', status: 'planned' },
+      { id: 'relative-clauses', title: 'Mệnh đề quan hệ và rút gọn mệnh đề', skill: 'Grammar · Part 5', duration: '25 phút', status: 'ready' },
       { id: 'conjunctions', title: 'Liên từ và quan hệ logic', skill: 'Grammar · Part 6', duration: '20 phút', status: 'planned' },
       { id: 'part4-talks', title: 'Part 4: announcements và presentations', skill: 'Listening · Part 4', duration: '25 phút', status: 'planned' },
       { id: 'business-collocations', title: 'Collocations trong công việc', skill: 'Vocabulary', duration: '20 phút', status: 'planned' },
@@ -53,7 +53,7 @@ export const toeicLevels: ToeicLevel[] = [
     outcomes: ['Nhận diện paraphrase và distractors', 'Suy luận ý định, hàm ý và thông tin không nói trực tiếp', 'Kết nối dữ kiện từ nhiều văn bản và hội thoại'],
     lessons: [
       { id: 'advanced-grammar', title: 'Cấu trúc nâng cao và bẫy ngữ pháp', skill: 'Reading · Part 5–6', duration: '30 phút', status: 'planned' },
-      { id: 'paraphrase-inference', title: 'Paraphrase, inference và distractors', skill: 'Listening · Reading', duration: '30 phút', status: 'planned' },
+      { id: 'paraphrase-inference', title: 'Paraphrase, inference và distractors', skill: 'Listening · Reading', duration: '30 phút', status: 'ready' },
       { id: 'multiple-passages', title: 'Part 7: double và triple passages', skill: 'Reading · Part 7', duration: '35 phút', status: 'planned' },
       { id: 'timed-mock', title: 'Chiến thuật làm bài 120 phút', skill: 'Full test', duration: '45 phút', status: 'planned' },
     ],
@@ -84,6 +84,88 @@ export const starterLesson = {
     { prompt: 'The new branch _____ near the central station.', choices: ['is located', 'locating', 'location', 'locate'], answer: 0, explanation: 'Câu cần động từ chính. is located là cấu trúc bị động/mô tả vị trí phù hợp với chủ ngữ số ít.' },
   ],
 };
+
+
+export const additionalLessons = [
+  {
+    id: 'basic-tenses', title: 'Các thì cơ bản trong TOEIC', level: '151–300',
+    objective: 'Nhận biết thời điểm xảy ra hành động và chọn đúng dạng thì theo ngữ cảnh công việc.',
+    sections: [
+      { heading: '1. Hiện tại đơn', body: 'Dùng cho lịch trình, thói quen và sự thật. Chủ ngữ số ít thường đi với động từ thêm -s/-es.', examples: ['The store opens at 8 a.m. every day.', 'Our manager reviews the figures each week.'] },
+      { heading: '2. Quá khứ đơn và hiện tại hoàn thành', body: 'Quá khứ đơn đi với mốc thời gian đã kết thúc (yesterday, last week, in 2024). Hiện tại hoàn thành diễn tả trải nghiệm hoặc kết quả liên quan đến hiện tại, thường đi với since, for, already, yet.', examples: ['The shipment arrived yesterday.', 'The company has opened three new branches since January.'] },
+      { heading: '3. Tương lai và lịch trình', body: 'Will thường diễn tả quyết định hoặc dự đoán; be going to diễn tả dự định; hiện tại đơn có thể dùng cho lịch trình cố định.', examples: ['The director will announce the results tomorrow.', 'The train leaves at 6:45 p.m.'] },
+    ],
+    vocabulary: [
+      { word: 'reschedule', meaning: 'sắp xếp lại lịch', pos: 'verb', example: 'We need to reschedule the interview.' },
+      { word: 'upcoming', meaning: 'sắp tới', pos: 'adjective', example: 'The upcoming conference will be held in May.' },
+      { word: 'since', meaning: 'kể từ (mốc thời gian)', pos: 'preposition / conjunction', example: 'She has worked here since 2021.' },
+    ],
+    questions: [
+      { prompt: 'The office usually _____ at 8:30 a.m.', choices: ['open', 'opens', 'opened', 'opening'], answer: 1, explanation: 'Usually diễn tả thói quen; the office là chủ ngữ số ít nên dùng opens.' },
+      { prompt: 'The shipment _____ yesterday afternoon.', choices: ['arrives', 'has arrived', 'arrived', 'will arrive'], answer: 2, explanation: 'Yesterday afternoon là mốc quá khứ đã kết thúc, dùng quá khứ đơn arrived.' },
+      { prompt: 'The company _____ two new branches since March.', choices: ['opens', 'opened', 'has opened', 'will open'], answer: 2, explanation: 'Since + mốc thời gian thường đi với hiện tại hoàn thành để diễn tả kết quả kéo dài đến hiện tại.' },
+    ],
+  },
+  {
+    id: 'word-forms', title: 'Word forms: noun, verb, adjective, adverb', level: '301–450',
+    objective: 'Dựa vào vị trí trong câu để xác định loại từ cần điền ở Part 5.',
+    sections: [
+      { heading: '1. Nhận diện vị trí danh từ', body: 'Danh từ thường đứng sau mạo từ (a/an/the), tính từ sở hữu và tính từ. Nó có thể làm chủ ngữ hoặc tân ngữ.', examples: ['The proposal needs approval.', 'We received an invitation to the event.'] },
+      { heading: '2. Tính từ và trạng từ', body: 'Tính từ bổ nghĩa cho danh từ hoặc đứng sau linking verbs. Trạng từ thường bổ nghĩa cho động từ, tính từ hoặc cả câu; nhiều trạng từ có đuôi -ly.', examples: ['The report is accurate.', 'The assistant responded quickly.'] },
+      { heading: '3. Học theo word family', body: 'Một gốc từ có thể tạo thành nhiều từ loại. Hãy nhìn vị trí chỗ trống trước, sau đó mới xét nghĩa và dạng từ.', examples: ['decide (verb) → decision (noun) → decisive (adjective) → decisively (adverb).', 'The manager made a final decision.'] },
+    ],
+    vocabulary: [
+      { word: 'accurate', meaning: 'chính xác', pos: 'adjective', example: 'Please make sure the figures are accurate.' },
+      { word: 'accuracy', meaning: 'độ chính xác', pos: 'noun', example: 'Accuracy is essential when preparing invoices.' },
+      { word: 'efficiently', meaning: 'một cách hiệu quả', pos: 'adverb', example: 'The new system processes orders efficiently.' },
+    ],
+    questions: [
+      { prompt: 'The accounting team checked the figures for _____.', choices: ['accurate', 'accuracy', 'accurately', 'accuracies'], answer: 1, explanation: 'Sau giới từ for cần danh từ; accuracy là danh từ.' },
+      { prompt: 'All applications must be completed _____.', choices: ['accurate', 'accuracy', 'accurately', 'accuracies'], answer: 2, explanation: 'Bổ nghĩa cho động từ completed cần trạng từ accurately.' },
+      { prompt: 'The company introduced an _____ system for tracking orders.', choices: ['efficiency', 'efficient', 'efficiently', 'efficiencies'], answer: 1, explanation: 'Chỗ trống đứng trước danh từ system nên cần tính từ efficient.' },
+    ],
+  },
+  {
+    id: 'relative-clauses', title: 'Mệnh đề quan hệ và rút gọn mệnh đề', level: '451–600',
+    objective: 'Dùng who, which, that, whose, where để nối thông tin và tránh chọn nhầm đại từ quan hệ.',
+    sections: [
+      { heading: '1. Chọn đại từ quan hệ', body: 'Who thay cho người; which thay cho vật/sự việc; that có thể thay cho người hoặc vật trong mệnh đề xác định; whose diễn tả sở hữu; where chỉ địa điểm.', examples: ['The employee who handles payroll is on leave.', 'The software that we installed is easy to use.', 'The building where our office is located has a new elevator.'] },
+      { heading: '2. Mệnh đề xác định và không xác định', body: 'Mệnh đề xác định cung cấp thông tin cần thiết và không dùng dấu phẩy. Mệnh đề không xác định bổ sung thông tin, thường được ngăn bằng dấu phẩy; không dùng that trong loại này.', examples: ['The clients who registered early will receive a discount.', 'Ms. Lee, who joined us in April, will lead the project.'] },
+      { heading: '3. Rút gọn mệnh đề quan hệ', body: 'Có thể rút gọn mệnh đề quan hệ chủ động bằng V-ing và bị động bằng V3/ed khi cấu trúc phù hợp.', examples: ['Employees working remotely must attend the online briefing.', 'Documents submitted after Friday will not be accepted.'] },
+    ],
+    vocabulary: [
+      { word: 'applicant', meaning: 'ứng viên/người nộp đơn', pos: 'noun', example: 'Applicants who meet the requirements will be contacted.' },
+      { word: 'requirement', meaning: 'yêu cầu', pos: 'noun', example: 'The position has several technical requirements.' },
+      { word: 'submit', meaning: 'nộp', pos: 'verb', example: 'Please submit the form before the deadline.' },
+    ],
+    questions: [
+      { prompt: 'The consultant _____ prepared the proposal will attend the meeting.', choices: ['who', 'where', 'whose', 'which'], answer: 0, explanation: 'Danh từ đứng trước là người (consultant) và đại từ làm chủ ngữ của prepared, nên dùng who.' },
+      { prompt: 'The new branch, _____ opened last month, is already profitable.', choices: ['that', 'who', 'which', 'whose'], answer: 2, explanation: 'Mệnh đề không xác định có dấu phẩy, nói về vật/chi nhánh nên dùng which, không dùng that.' },
+      { prompt: 'Candidates _____ after the deadline will not be considered.', choices: ['submit', 'submitting', 'submitted', 'submission'], answer: 2, explanation: 'Documents/candidates được nộp là ý bị động; dạng rút gọn phù hợp là submitted.' },
+    ],
+  },
+  {
+    id: 'paraphrase-inference', title: 'Paraphrase, inference và distractors', level: '601–750',
+    objective: 'Tìm cách diễn đạt tương đương và suy luận có căn cứ mà không chọn đáp án chỉ vì trùng từ.',
+    sections: [
+      { heading: '1. Paraphrase là gì?', body: 'Đề TOEIC thường diễn đạt lại thông tin bằng từ đồng nghĩa, đổi loại từ hoặc đổi cấu trúc câu. Không nên chỉ dò từ giống hệt trong audio hoặc bài đọc.', examples: ['purchase ↔ buy', 'postpone ↔ put off', 'The event was called off. = The event was cancelled.'] },
+      { heading: '2. Suy luận có căn cứ', body: 'Inference là kết luận hợp lý dựa trên chi tiết đã cho. Đáp án đúng không cần được nói nguyên văn, nhưng phải được hỗ trợ bởi ngữ cảnh.', examples: ['“I left the revised file on your desk.” → The speaker has updated a document.', '“The last train has already departed.” → The listener may need another way home.'] },
+      { heading: '3. Nhận diện distractors', body: 'Bẫy thường lặp lại một từ trong bài nghe nhưng gắn sai người, sai thời điểm hoặc sai mục đích. Đọc câu hỏi trước, xác định loại thông tin cần tìm và kiểm tra toàn bộ ngữ cảnh.', examples: ['Nghe thấy “Friday” không có nghĩa mọi đáp án chứa Friday đều đúng.', 'Phân biệt điều đã xảy ra với kế hoạch sẽ thực hiện.'] },
+    ],
+    vocabulary: [
+      { word: 'revise', meaning: 'chỉnh sửa', pos: 'verb', example: 'The editor revised the proposal before submission.' },
+      { word: 'postpone', meaning: 'hoãn lại', pos: 'verb', example: 'The launch was postponed because of bad weather.' },
+      { word: 'indicate', meaning: 'cho thấy; chỉ ra', pos: 'verb', example: 'The survey results indicate strong customer demand.' },
+    ],
+    questions: [
+      { prompt: 'The manager said the product launch would be postponed. What does this mean?', choices: ['The launch will happen earlier.', 'The launch will take place later.', 'The product has been discontinued.', 'The launch has already started.'], answer: 1, explanation: 'Postponed được diễn đạt lại là delayed hoặc put off: sự kiện sẽ diễn ra muộn hơn.' },
+      { prompt: '“I have already sent the revised contract to the client.” What can be inferred?', choices: ['The contract has been updated and sent.', 'The client rejected the contract.', 'The contract is still being drafted.', 'The client will send a new contract.'], answer: 0, explanation: 'Revised contract cho biết hợp đồng đã được chỉnh sửa; have sent cho biết đã gửi đi.' },
+      { prompt: 'A speaker says, “The printer is out of order, so I will use the one on the third floor.” What will the speaker probably do?', choices: ['Repair the printer immediately.', 'Buy a new printer.', 'Print documents on another floor.', 'Cancel the printing request.'], answer: 2, explanation: 'Out of order nghĩa là hỏng/không hoạt động; người nói sẽ dùng máy in ở tầng ba.' },
+    ],
+  },
+];
+
+export const lessonLibrary = [starterLesson, ...additionalLessons];
 
 export const vocabularySeed = [
   { word: 'appointment', meaning: 'cuộc hẹn', pos: 'noun', example: 'I have an appointment with the client at 10 a.m.', topic: 'Schedule' },
